@@ -4,6 +4,29 @@
   "version": "1.0",
   "description": "A productive tab manager doubling as a website blocker. Let online work flow like time.",
 
-  "icons": {}
+  "icons": {},
 
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ],
+
+  "background": {
+    "scripts": ["background/background.js"]
+  },
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true,
+    "browser_style": false
+  },
+
+  "browser_action": {
+    "default_icon": "icons/tab_matds.png",
+    "default_title": "Chronos",
+    "default_popup": "popup/popup.html",
+    "browser_style": false
+  }
 }

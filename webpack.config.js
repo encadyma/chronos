@@ -1,7 +1,9 @@
 const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 // Inspired by vue-devtools build process
 // https://github.com/encadyma/vue-devtools/blob/master/shells/createConfig.js
@@ -24,6 +26,9 @@ module.exports = {
     filename: '[name]/[name].js',
     path: path.join(__dirname, 'build')
   },
+  resolve: {
+    extensions: ['*', '.js', '.vue', '.json']
+  },
   module: {
     rules: [
       {
@@ -36,29 +41,45 @@ module.exports = {
         test: /\.vue$/, 
         loader: 'vue-loader',
         options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          },
           transpileOptions: bubleOptions
         } 
       },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
     ]
   },
+  performance: {
+    hints: false
+  },
   plugins: [
-    // new VueLoaderPlugin(),
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
     new HtmlWebpackPlugin({
       name: 'popup',
+      title: 'Popup - Chronos',
       filename: 'popup/popup.html',
       template: 'src/template.html',
       chunks: ['popup']
     }),
     new HtmlWebpackPlugin({
       name: 'options',
+      title: 'Options - Chronos',
       filename: 'options/options.html',
       template: 'src/template.html',
       chunks: ['options']
     }),
     new CopyWebpackPlugin([
-      { from: 'src/manifest.json' }
-    ])
+      { from: 'src/manifest.json' },
+      { from: 'src/icons/', to: 'icons/' }
+    ]),
+    new UglifyJsPlugin()
   ],
-  mode: 'production'
+  mode: 'production',
+  target: 'web'
 }

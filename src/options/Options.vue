@@ -1,11 +1,9 @@
 <template>
   <div>
-    Hello there!
-    <ul>
-      <li v-for="tab in tabs" :key="tab.id">
-        {{ tab.title }}
-      </li>
-    </ul>
+    Hello there! This is new!
+    <div v-for="tab in tabs" :key="tab.id">
+      {{ tab }}
+    </div>
   </div>
 </template>
 
