@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 // Inspired by vue-devtools build process
-// https://github.com/encadyma/vue-devtools/blob/master/shells/createConfig.js
+// https://github.com/vuejs/vue-devtools/blob/master/shells/createConfig.js
 
 const bubleOptions = {
   objectAssign: 'Object.assign',
