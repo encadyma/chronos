@@ -7,19 +7,22 @@
         <i class="text-sub text-sub_dimmer">Loading all tabs...</i>
       </div>
     </div>
+    <tabs-options/>
   </div>
 </template>
 
 <script>
   import PopupTab from './components/PopupTab'
+  import TabsOptions from './components/TabsOptions'
 
   export default {
     data() {
       return {
-        currentWindowId: -1
+        currentWindowId: -1,
+        selectionMode: false
       }
     },
-    components: { PopupTab },
+    components: { PopupTab, TabsOptions },
     props: {
       tabs: {
         type: Array,

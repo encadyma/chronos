@@ -66,3 +66,4 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - Different Themes for Different Profiles
 - Time limits in profiles
 - Tab reorganization? (by site domain)
+- Show whether the tab is currently "sleeping" (not loaded)

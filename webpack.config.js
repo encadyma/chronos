@@ -27,7 +27,10 @@ module.exports = {
     path: path.join(__dirname, 'build')
   },
   resolve: {
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.runtime.js'
+    }
   },
   module: {
     rules: [
@@ -48,6 +51,13 @@ module.exports = {
         } 
       },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      }
     ]
   },
   performance: {
