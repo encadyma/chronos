@@ -1,0 +1,63 @@
+THOUGHTLOG
+===============
+
+Description: A productive tab manager doubling as a website blocker. Let online work flow like time.
+
+# Features
+
+### Fundamental (must-do) -- v1
+- Tracks current tabs
+- Popup shows what tabs are present
+  - Add Tab
+  - Delete Tab
+
+### Data Storage -- v2
+- Data storage system should track tab history
+  - Should track:
+    - When a user creates a new tab (HISTORY_TAB_CREATE)
+    - When a user deletes a new tab (HISTORY_TAB_REMOVE)
+    - When a user navigates to a different site (HISTORY_TAB_NAVIGATE)
+    - Timestamp (:timestamp)
+    - Tab ID (:id)
+    - NOTE: Intercept this during a session restore or a state restore,
+      and use:
+      - Session Restore (Firefox) - HISTORY_RESTORE_SESSION
+      - State Restore (Chronos) - HISTORY_RESTORE_STATE
+    - A new "History" page (list based, no visual)
+- States
+  - Ability to save current tab state (and restore it)
+  - Ability to save a tab for later
+  - Ability to "quick-switch" out of states
+
+### Profiles -- v3
+- Profiles dictate what sites the user can access, or what sites should be blocked
+  - Whitelist & Blocklist
+- Different modes of working with a profile
+  - Strict: Follow the Profile's 
+- Simple Icons for Profiles
+
+### Lists -- v4 (should be included?)
+- Common websites that the user visits
+
+### Full Release -- v5
+- Home page for quick actions
+- Visual Timeline feature
+- Suggested Sites to go based on profile
+- A marker based on whether the person has visited the page before
+  - https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/history/getVisits
+
+### Awesome -- v6
+- Folders, Subfolders for States
+- For big States: Instead of restoring all pages, load a single page with list of tab names
+- Custom Block pages
+  - Basic Blocked Page
+  - Recommended Sites Page
+  - Motivational Quote Page
+  - Scoreboard Page
+  - Random Codepen Page
+  - Awwwards Website Page
+  - Random Algorithm Page
+- Theming the Options Page
+- Different Themes for Different Profiles
+- Time limits in profiles
+- Tab reorganization? (by site domain)

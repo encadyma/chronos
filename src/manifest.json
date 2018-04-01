@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Chronos",
+  "version": "1.0",
+  "description": "A productive tab manager doubling as a website blocker. Let online work flow like time.",
+
+  "icons": {}
+
+}
