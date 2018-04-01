@@ -10,7 +10,8 @@
     "<all_urls>",
     "tabs",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "windows"
   ],
 
   "background": {

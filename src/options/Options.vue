@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import '../reset.css'
+
   export default {
     data() {
       return {
