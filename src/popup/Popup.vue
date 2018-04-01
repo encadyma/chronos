@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import '../fonts/material.css'
   import '../reset.css'
   import '../chronos.css'
 

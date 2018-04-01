@@ -20,13 +20,22 @@
   background-color: rgba(100, 100, 100, 0.18);
 }
 
-.tab-item_selected {
+.tab-item_active {
   color: rgb(55, 135, 255);
 }
 
-.tab-item_selected_active {
+.tab-item_active_full {
   background-color: rgba(55, 135, 255, 0.1) !important;
   color: rgb(55, 135, 255);
+}
+
+.tab-item_selected {
+  color: rgb(220, 120, 50);
+}
+
+.tab-item_selected_full {
+  background-color: rgba(255, 135, 55, 0.1) !important;
+  color: rgb(220, 120, 50);
 }
 
 .tab-item * {
