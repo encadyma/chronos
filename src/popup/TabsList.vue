@@ -13,6 +13,7 @@
     <tabs-options 
       @tab-options-deletion-execute="deleteHighlightedTabs"
       @tab-options-deletion-enable="enableDeletion"
+      @tab-options-action-disable="disableAction"
       :isDeleting="isDeleting"/>
   </div>
 </template>
@@ -57,6 +58,11 @@
       enableDeletion() {
         this.selectionMode = true
         this.isDeleting = true
+      },
+      disableAction() {
+        this.selectedTabs = []
+        this.selectionMode = false
+        this.isDeleting = false
       },
       handleTabToggle(tabId) {
         if (this.selectedTabs.indexOf(tabId) !== -1) {
