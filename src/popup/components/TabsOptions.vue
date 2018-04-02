@@ -5,7 +5,7 @@
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
         <i class="material-icons">close</i>
       </div>
-      <div v-if="!isSelecting" class="tabs-options__item" title="Open New Tab">
+      <div v-if="!isSelecting" class="tabs-options__item" title="Open New Tab" @click="goAddTab">
         <i class="material-icons">add</i>
       </div>
       <div class="tabs-options__item"
@@ -36,6 +36,12 @@
       },
       cancelAction() {
         this.$emit('tab-options-action-disable')
+      },
+      goAddTab() {
+        this.$router.push({ name: 'AddTab' })
+      },
+      goLoadState() {
+        this.$router.push({ name: 'LoadState' })
       }
     },
     computed: {
@@ -45,47 +51,3 @@
     },
   }
 </script>
-
-<style scoped>
-.tabs-options {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 4px 10px;
-}
-
-.tabs-options__menu {
-  display: flex;
-  flex-direction: row;
-}
-
-.tabs-options__item {
-  color: rgba(0, 0, 0, 0.6);
-  margin: 0 2px;
-}
-
-.tabs-options__item:hover {
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.tabs-options__item:active {
-  color: rgba(0, 0, 0, 1);
-}
-
-.tabs-options__item .material-icons {
-  font-size: 24px;
-  vertical-align: middle;
-}
-
-.tabs-options__item_highlighted_red {
-  color: rgb(220, 30, 30);
-}
-
-.tabs-options__item_highlighted_red:hover {
-  color: rgb(185, 25, 25);
-}
-
-.tabs-options__item_highlighted_red:active {
-  color: rgb(135, 20, 20);
-}
-</style>

@@ -7,4 +7,6 @@ html, body {
   min-width: 320px;
   -moz-user-select: none;
   user-select: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

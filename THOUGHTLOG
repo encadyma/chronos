@@ -5,15 +5,15 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 
 # Features
 
-### Fundamental (must-do) -- v1
+### Fundamental (must-do) -- v1 (✓)
 - Tracks current tabs (✓)
 - Popup shows what tabs are present (✓)
-- Modifier toolbar (wip)
-  - Add Tab
-  - Delete Tab
+- Modifier toolbar (✓)
+  - Add Tab (✓)
+  - Delete Tab (✓)
 
-### Data Storage -- v2
-- Data storage system should track tab history
+### Data Storage -- v2 (wip)
+- Data storage system should track tab history (on hold)
   - Should track:
     - When a user creates a new tab (HISTORY_TAB_CREATE)
     - When a user deletes a new tab (HISTORY_TAB_REMOVE)
@@ -25,7 +25,7 @@ Description: A productive tab manager doubling as a website blocker. Let online 
       - Session Restore (Firefox) - HISTORY_RESTORE_SESSION
       - State Restore (Chronos) - HISTORY_RESTORE_STATE
     - A new "History" page (list based, no visual)
-- States
+- States (wip)
   - Ability to save current tab state (and restore it)
   - Ability to save a tab for later
   - Ability to "quick-switch" out of states

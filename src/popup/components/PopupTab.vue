@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tab-item" :class="tabItemClasses" @click="clickOnTab()">
+    <div class="tab-item" :class="tabItemClasses" @click="$emit('click')">
       <img :src="favicon" class="tab-item__favicon"/>
       <span>{{ title }}</span>
     </div>
@@ -23,6 +23,14 @@
         type: Number,
         default: -1
       },
+      isHighlighted: {
+        type: Boolean,
+        default: false
+      },
+      isActive: {
+        type: Boolean,
+        default: false
+      },
       isSelecting: {
         type: Boolean,
         default: false
@@ -41,12 +49,6 @@
         if (this.tabData.title.length > 35) return this.tabData.title.substr(0, 32) + '...'
         return this.tabData.title
       },
-      isActive() {
-        return this.tabData.active
-      },
-      isSameWindow() {
-        return this.currentWindowId === this.tabData.windowId
-      },
       tabItemClasses() {
         if (this.isSelecting) {
           return {
@@ -55,35 +57,11 @@
           }
         } else {
           return {
-            'tab-item_active': this.isActive,
-            'tab-item_active_full': this.isSameWindow && this.isActive
+            'tab-item_active': this.isHighlighted,
+            'tab-item_active_full': this.isActive
           }
         }
-      }
-    },
-    methods: {
-      clickOnTab() {
-        if (this.isSelecting) {
-          this.selectTab()
-        } else {
-          this.changeTab()
-        }
-      },
-      changeTab() {
-        browser.windows.update(
-          this.tabData.windowId, 
-          { focused: true }
-        ).then(() => {
-          browser.tabs.update(this.tabData.id, { active: true })
-        })
-      },
-      selectTab() {
-        this.$emit('tab-select-toggle', this.tabData.id)
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>
