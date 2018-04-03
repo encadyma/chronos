@@ -8,7 +8,7 @@
     "watch:webpack": "webpack . --watch",
     "watch:firefox": "web-ext run -s ./build --verbose",
     "prebuild": "cross-env NODE_ENV=production webpack .",
-    "build": "web-ext run -s ./build -a ./dist"
+    "build": "web-ext build -s ./build -a ./dist"
   },
   "main": "hello.js",
   "keywords": [

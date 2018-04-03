@@ -2,9 +2,19 @@
   "manifest_version": 2,
   "name": "Chronos",
   "version": "1.0",
+  "author": "encadyma",
   "description": "A productive tab manager doubling as a website blocker. Let online work flow like time.",
 
-  "icons": {},
+  "applications": {
+    "gecko": {
+      "id": "chronos@encadyma.com",
+      "strict_min_version": "57.0"
+    }
+  },
+
+  "icons": {
+    "48": "icons/tab_matds.png"
+  },
 
   "permissions": [
     "<all_urls>",
