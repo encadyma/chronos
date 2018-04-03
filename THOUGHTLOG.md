@@ -28,7 +28,7 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - States (wip)
   - Automatically save last deleted tabs as 'last deleted state' (✓)
   - Ability to save current tab state (and restore it) (wip)
-  - Ability to save a tab for later (wip)
+  - ~~Ability to save a tab for later~~ (is needed?)
   - Ability to "quick-switch" out of states (wip)
 
 ### Profiles -- v3
@@ -68,6 +68,11 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - Time limits in profiles
 - Tab reorganization? (by site domain)
 - Show whether the tab is currently "sleeping" (not loaded)
+- Show whether the tab is playing music
+- Shortcuts for opening the popup
+- Search through tabs
 
 ### Buglist -- vNOW
 - Windows do not activate/focus when switching tabs across windows
+- When transitioning to LoadStates page, the window adjusts width slightly.. readjust min-width instead
+- Get rid of "You are running Vue in development mode." message
