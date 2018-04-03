@@ -68,3 +68,6 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - Time limits in profiles
 - Tab reorganization? (by site domain)
 - Show whether the tab is currently "sleeping" (not loaded)
+
+### Buglist -- vNOW
+- Windows do not activate/focus when switching tabs across windows
