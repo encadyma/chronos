@@ -1,6 +1,5 @@
 /**
- * This is a dead file.
- * Do not touch.
+ * Says hello to the browser console.
  */
 
 // console.log("Hello there!");
@@ -17,3 +16,5 @@
 // console.log("which can be found in `./src/`.");
 // console.log();
 // console.log("Thank you for your interest in Chronos!");
+
+console.log("[chronos] Hello! Chronos has loaded.")
