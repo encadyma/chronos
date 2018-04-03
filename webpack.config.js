@@ -16,7 +16,7 @@ const bubleOptions = {
   }
 }
 
-module.exports = {
+let config = {
   entry: {
     popup: './src/popup/popup.js',
     options: './src/options/options.js',
@@ -98,8 +98,28 @@ module.exports = {
       { from: 'src/icons/', to: 'icons/' }
     ]),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new UglifyJsPlugin()
   ],
   mode: 'production',
-  target: 'web'
+  devtool: false,
+  target: 'web',
+  cache: true
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        }
+      },
+      parallel: true
+    })
+  )
+} else {
+  const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
+  const smp = new SpeedMeasurePlugin()
+  config = smp.wrap(config)
+}
+
+module.exports = config
