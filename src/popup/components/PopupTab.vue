@@ -38,6 +38,10 @@
       isSelected: {
         type: Boolean,
         default: false
+      },
+      titleCharacterLimit: {
+        type: Number,
+        default: 35
       }
     },
     computed: {
@@ -46,8 +50,9 @@
         return this.tabData.favIconUrl 
       },
       title() {
-        if (this.tabData.title.length > 35) return this.tabData.title.substr(0, 32) + '...'
-        return this.tabData.title
+        if (this.tabData.title.length > this.titleCharacterLimit) {
+          return this.tabData.title.substr(0, this.titleCharacterLimit - 3) + '...'
+        } else return this.tabData.title
       },
       tabItemClasses() {
         if (this.isSelecting) {

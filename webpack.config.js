@@ -97,6 +97,7 @@ module.exports = {
       { from: 'src/manifest.json' },
       { from: 'src/icons/', to: 'icons/' }
     ]),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new UglifyJsPlugin()
   ],
   mode: 'production',

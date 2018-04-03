@@ -26,9 +26,10 @@ Description: A productive tab manager doubling as a website blocker. Let online 
       - State Restore (Chronos) - HISTORY_RESTORE_STATE
     - A new "History" page (list based, no visual)
 - States (wip)
-  - Ability to save current tab state (and restore it)
-  - Ability to save a tab for later
-  - Ability to "quick-switch" out of states
+  - Automatically save last deleted tabs as 'last deleted state' (✓)
+  - Ability to save current tab state (and restore it) (wip)
+  - Ability to save a tab for later (wip)
+  - Ability to "quick-switch" out of states (wip)
 
 ### Profiles -- v3
 - Profiles dictate what sites the user can access, or what sites should be blocked

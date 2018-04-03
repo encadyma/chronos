@@ -5,7 +5,7 @@
         <span>Suggested Sites</span>
       </div>
       <div class="tabs-list__list">
-        <popup-tab v-for="tab in suggestedTabs" :key="tab.id" :tabData="tab" :enableClickEvents="false" @click="openSite(tab.url)"/>
+        <popup-tab v-for="tab in suggestedTabs" :key="tab.id" :tabData="tab" @click="openSite(tab.url)"/>
       </div>
     </div>
     <div class="tabs-list">
@@ -13,13 +13,13 @@
         <span>Top Sites</span>
       </div>
       <div class="tabs-list__list">
-        <popup-tab v-if="!isLoading" v-for="site in computedTopSites" :key="site.id" :tabData="site" :enableClickEvents="false" @click="openSite(site.url)"/>
+        <popup-tab v-if="!isLoading" v-for="site in computedTopSites" :key="site.id" :tabData="site" @click="openSite(site.url)"/>
+        <div v-if="isLoading" class="tab-item">
+          <i class="text-sub text-sub_dimmer">Loading top sites...</i>
+        </div>
         <div class="tab-item" @click="expandAll = !expandAll">
           <i class="text-sub text-sub_dimmer" v-if="!expandAll">Show more...</i>
           <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
-        </div>
-        <div v-if="isLoading" class="tab-item">
-          <i class="text-sub text-sub_dimmer">Loading top sites...</i>
         </div>
       </div>
     </div>

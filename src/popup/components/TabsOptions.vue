@@ -1,6 +1,10 @@
 <template>
   <div class="tabs-options">
-    <div class="tabs-options__menu"></div>
+    <div class="tabs-options__menu">
+      <div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
+        <i class="material-icons">unarchive</i>
+      </div>
+    </div>
     <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
         <i class="material-icons">close</i>

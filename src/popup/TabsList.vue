@@ -28,6 +28,7 @@
 <script>
   import PopupTab from './components/PopupTab'
   import TabsOptions from './components/TabsOptions'
+  import moment from 'moment'
 
   export default {
     data() {
@@ -65,10 +66,36 @@
         })
       },
       deleteHighlightedTabs() {
-        browser.tabs.remove(this.selectedTabs).then(() => {
-          this.selectedTabs = []
-          this.selectionMode = false
-          this.isDeleting = false
+        this.saveSelectedTabsAsState(this.selectedTabs).then(() => {
+          browser.tabs.remove(this.selectedTabs).then(() => {
+            this.selectedTabs = []
+            this.selectionMode = false
+            this.isDeleting = false
+          })
+        })
+      },
+      saveSelectedTabsAsState(tabs) {
+        if (!tabs.length) return Promise.resolve(true)
+
+        return new Promise((resolve, reject) => {
+          let state = {}
+          const resolvedTabs = tabs.map(id => {
+            const thisTab = this.tabs.find(t => t.id === id)
+            return { title: thisTab.title, favIconUrl: thisTab.favIconUrl, url: thisTab.url }
+          })
+
+          state.title = 'Last deleted on ' + moment().format('MMM D, YYYY h:mm:ss A')
+          state.favIconUrl = '../icons/ic_restore_backup.png'
+          state.tabs = resolvedTabs
+          state.timestamp = parseInt(moment().format('x'))
+          state.type = 'last_deleted'
+
+          return browser.storage.local.get("states").then((store) => {
+            state.id = store.states.length + 1
+            return browser.storage.local.set({
+              states: [state].concat(store.states)
+            }).then(resolve)
+          })
         })
       },
       enableDeletion() {  // Enter deletion mode
