@@ -9,15 +9,15 @@
           <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
           <span>Edit state...</span>
         </div>
-        <div class="tab-item" @click="openStateInWindow()">
+        <div class="tab-item" @click="openStateInCurrentWindow">
           <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
           <span>Add tabs to current window</span>
         </div>
-        <div class="tab-item cursor-blocked">
+        <div class="tab-item" @click="openStateInNewWindow">
           <img :src="'../icons/ic_open_in_new.png'" class="tab-item__favicon"/>
           <span>Open tabs in new window</span>
         </div>
-        <div class="tab-item cursor-blocked">
+        <div class="tab-item" @click="openStateByReplacingWindow">
           <img :src="'../icons/ic_swap_vert.png'" class="tab-item__favicon"/>
           <span>Replace this window with saved tabs</span>
         </div>
@@ -30,8 +30,8 @@
       <div class="tabs-list__list">
         <popup-tab 
           v-if="!isLoading" 
-          v-for="tab in filteredTabs" 
-          :key="tab.title" :tabData="tab" 
+          v-for="(tab, i) in filteredTabs" 
+          :key="i" :tabData="tab" 
           @click="openTab(tab)"/>
         <div v-if="isLoading" class="tab-item">
           <i class="text-sub text-sub_dimmer">Loading tabs...</i>
@@ -77,12 +77,30 @@
       openTab(tab) {
         browser.tabs.create({ url: tab.url })
       },
-      openStateInWindow() {
+      openStateInCurrentWindow(tabs = null) {
         if (!this.currentState) return;
 
-        this.tabs.forEach(t => {
-          browser.tabs.create({ url: t.url })
-        }) 
+        tabs = tabs || this.tabs
+        return Promise.all(tabs.map(t => browser.tabs.create({ url: t.url })))
+      },
+      openStateInNewWindow() {
+        if (!this.currentState) return;
+
+        return browser.windows.create({
+          url: this.tabs.map(t => t.url)
+        })
+      },
+      openStateByReplacingWindow() {
+        if (!this.currentState) return;
+
+        browser.tabs.query({ currentWindow: true }).then(currentTabs => {
+          const currentTabIds = currentTabs.map(t => t.id)
+
+          // Create the first tab to keep window alive.
+          browser.tabs.create({ url: this.tabs[0].url })
+            .then(({ id }) => browser.tabs.remove(currentTabIds))
+            .then(_ => this.openStateInCurrentWindow(this.tabs.slice(1, this.tabs.length)))
+        })
       }
     },
   }
