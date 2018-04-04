@@ -1,6 +1,10 @@
 import Vue from 'vue'
+import router from './router'
+
 import Options from './Options.vue'
 
 let options = new Vue({
-  extends: Options
-}).$mount("#options")
+  el: '#options',
+  render: (createElement) => createElement(Options),
+  router
+})
