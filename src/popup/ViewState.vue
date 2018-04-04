@@ -5,9 +5,21 @@
         <span>Actions</span>
       </div>
       <div class="tabs-list__list">
-        <div class="tab-item" @click="goBack">
-          <img :src="'../icons/ic_arrow_back.png'" class="tab-item__favicon"/>
-          <span>Go Back</span>
+        <div class="tab-item cursor-blocked">
+          <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
+          <span>Edit state...</span>
+        </div>
+        <div class="tab-item cursor-blocked">
+          <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
+          <span>Add tabs to current window</span>
+        </div>
+        <div class="tab-item cursor-blocked">
+          <img :src="'../icons/ic_open_in_new.png'" class="tab-item__favicon"/>
+          <span>Open tabs in new window</span>
+        </div>
+        <div class="tab-item cursor-blocked">
+          <img :src="'../icons/ic_swap_vert.png'" class="tab-item__favicon"/>
+          <span>Replace this window with saved tabs</span>
         </div>
       </div>
     </div>
@@ -64,9 +76,6 @@
     methods: {
       openTab(tab) {
         browser.tabs.create({ url: tab.url })
-      },
-      goBack() {
-        this.$router.go(-1)
       }
     },
   }

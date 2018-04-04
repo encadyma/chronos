@@ -20,7 +20,7 @@
           <i class="text-sub text-sub_dimmer" v-if="!expandSavedStates">Show more...</i>
           <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
         </div>
-        <div v-if="!isLoading && !savedStates.length" class="tab-item">
+        <div v-if="!isLoading" class="tab-item cursor-blocked">
           <img :src="'../icons/ic_save.png'" class="tab-item__favicon"/>
           <span>Save new state...</span>
         </div>
