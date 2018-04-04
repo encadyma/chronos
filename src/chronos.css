@@ -101,3 +101,15 @@
 .tabs-options__item_highlighted_red:active {
   color: rgb(135, 20, 20);
 }
+
+.tabs-options__item_highlighted_blue {
+  color: rgb(55, 135, 255);
+}
+
+.tabs-options__item_highlighted_blue:hover {
+  color: rgb(45, 115, 215);
+}
+
+.tabs-options__item_highlighted_blue:active {
+  color: rgb(25, 75, 175);
+}

@@ -21,7 +21,9 @@
       @tab-options-deletion-execute="deleteHighlightedTabs"
       @tab-options-deletion-enable="enableDeletion"
       @tab-options-action-disable="disableAction"
-      :isDeleting="isDeleting"/>
+      @tab-options-deletion-toggle-save="shouldSaveTabs = !shouldSaveTabs"
+      :isDeleting="isDeleting"
+      :isSaving="shouldSaveTabs"/>
   </div>
 </template>
 
@@ -38,6 +40,7 @@
         isDeleting: false,
         selectedTabs: [],
         isLoading: true,
+        shouldSaveTabs: true,
         tabs: []
       }
     },
@@ -76,6 +79,7 @@
       },
       saveSelectedTabsAsState(tabs) {
         if (!tabs.length) return Promise.resolve(true)
+        if (!this.shouldSaveTabs) return Promise.resolve(true)
 
         return new Promise((resolve, reject) => {
           let state = {}
@@ -101,11 +105,13 @@
       enableDeletion() {  // Enter deletion mode
         this.selectionMode = true
         this.isDeleting = true
+        this.shouldSaveTabs = true
       },
       disableAction() {   // Enter (reset to) normal mode
         this.selectedTabs = []
         this.selectionMode = false
         this.isDeleting = false
+        this.shouldSaveTabs = true
       },
       clickOnTab(tabId) {
         if (this.isDeleting) {

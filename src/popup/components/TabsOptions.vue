@@ -4,6 +4,11 @@
       <div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
         <i class="material-icons">unarchive</i>
       </div>
+      <div v-if="isSelecting" class="tabs-options__item"
+        :class="{ 'tabs-options__item_highlighted_blue': isSaving }"
+        @click="toggleSaving" :title="isSaving ? 'Save Deleted Tabs (Enabled)' : 'Save Deleted Tabs (Disabled)'">
+        <i class="material-icons">save</i>
+      </div>
     </div>
     <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
@@ -29,6 +34,10 @@
         type: Boolean,
         default: false
       },
+      isSaving: {
+        type: Boolean,
+        default: true
+      },
     },
     methods: {
       toggleDeletion() {
@@ -37,6 +46,9 @@
         } else {
           this.$emit('tab-options-deletion-enable')
         }
+      },
+      toggleSaving() {
+        this.$emit('tab-options-deletion-toggle-save')
       },
       cancelAction() {
         this.$emit('tab-options-action-disable')

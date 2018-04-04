@@ -9,7 +9,7 @@
           <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
           <span>Edit state...</span>
         </div>
-        <div class="tab-item cursor-blocked">
+        <div class="tab-item" @click="openStateInWindow()">
           <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
           <span>Add tabs to current window</span>
         </div>
@@ -76,6 +76,13 @@
     methods: {
       openTab(tab) {
         browser.tabs.create({ url: tab.url })
+      },
+      openStateInWindow() {
+        if (!this.currentState) return;
+
+        this.tabs.forEach(t => {
+          browser.tabs.create({ url: t.url })
+        }) 
       }
     },
   }
