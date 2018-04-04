@@ -30,6 +30,7 @@
         </div>
       </div>
     </div>
+    <tabs-navigation/>
   </div>
 </template>
 
