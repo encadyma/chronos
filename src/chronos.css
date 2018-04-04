@@ -61,6 +61,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   padding: 4px 10px;
 }
 
@@ -70,11 +71,11 @@
 }
 
 .tabs-options__menu__profile {
-  font-size: 10px;
-  border-radius: 2px;
+  font-size: 11px;
+  border-radius: 4px;
   color: #333;
   text-align: center;
-  padding: 4px 10px;
+  padding: 5px 10px;
   min-width: 160px;
 }
 
@@ -84,6 +85,19 @@
 
 .tabs-options__menu__profile:active {
   background-color: rgba(100, 100, 100, 0.10);
+}
+
+.tabs-options__menu__profile_blue {
+  background-color: rgb(55, 135, 255);
+  color: #fff;
+}
+
+.tabs-options__menu__profile_blue:hover {
+  background-color: rgb(50, 125, 235);
+}
+
+.tabs-options__menu__profile_blue:active {
+  background-color: rgb(45, 115, 215);
 }
 
 .tabs-options__item {
