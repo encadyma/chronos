@@ -28,8 +28,8 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - States (wip)
   - Automatically save last deleted tabs as 'last deleted state' (✓)
   - Ability to save current tab state (and restore it) (wip)
+  - Ability to "quick-switch" out of states (✓)
   - ~~Ability to save a tab for later~~ (is needed?)
-  - Ability to "quick-switch" out of states (wip)
 
 ### Profiles -- v3
 - Profiles dictate what sites the user can access, or what sites should be blocked

@@ -11,6 +11,9 @@
       </div>
     </div>
     <div class="tabs-options__menu">
+      <div class="tabs-options__menu__profile">No Profile</div>
+    </div>
+    <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
         <i class="material-icons">close</i>
       </div>
