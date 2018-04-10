@@ -9,7 +9,7 @@
           <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
           <span>Edit state...</span>
         </div>
-        <div class="tab-item" @click="openStateInCurrentWindow">
+        <div class="tab-item" @click="openStateInCurrentWindow(tabs)">
           <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
           <span>Add tabs to current window</span>
         </div>

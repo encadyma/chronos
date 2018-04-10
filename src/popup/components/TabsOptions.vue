@@ -1,8 +1,11 @@
 <template>
   <div class="tabs-options">
     <div class="tabs-options__menu">
-      <div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
+      <!--<div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
         <i class="material-icons">unarchive</i>
+      </div>-->
+      <div v-if="!isSelecting" class="tabs-options__item" title="Open Settings" @click="goToSettings">
+        <i class="material-icons">settings</i>
       </div>
       <div v-if="isSelecting" class="tabs-options__item"
         :class="{ 'tabs-options__item_highlighted_blue': isSaving }"
@@ -61,6 +64,9 @@
       },
       goLoadState() {
         this.$router.push({ name: 'LoadState' })
+      },
+      goToSettings() {
+        browser.tabs.create({ url: '/options/options.html' })
       }
     },
     computed: {

@@ -8,7 +8,7 @@
       <popup-tab 
         v-if="!isLoading" v-for="tab in tabs" 
         :key="tab.id" :tabData="tab" 
-        @click="clickOnTab(tab.id)" 
+        @click="clickOnTab(tab)" 
         :isHighlighted="tab.active" 
         :isActive="tab.active && tab.windowId === currentWindowId" 
         :isSelecting="selectionMode" 
@@ -113,11 +113,11 @@
         this.isDeleting = false
         this.shouldSaveTabs = true
       },
-      clickOnTab(tabId) {
+      clickOnTab({ id, windowId }) {
         if (this.isDeleting) {
-          this.handleTabToggle(tabId)
+          this.handleTabToggle(id)
         } else {
-          this.switchActiveTab(tabId)
+          this.switchActiveTab(id, windowId)
         }
       },
       handleTabToggle(tabId) {  // Once a tab is selected in a special mode
@@ -127,9 +127,9 @@
           this.selectedTabs.push(tabId)
         }
       },
-      switchActiveTab(tabId) {
+      switchActiveTab(tabId, windowId) {
         browser.windows.update(
-          this.currentWindowId, 
+          windowId, 
           { focused: true }
         ).then(() => {
           browser.tabs.update(tabId, { active: true })

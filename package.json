@@ -18,9 +18,11 @@
   "author": "Kevin Mo <encadyma.hi@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuedraggable": "^2.16.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
