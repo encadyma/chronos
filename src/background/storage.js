@@ -7,11 +7,14 @@ export default async function () {
 
   if (!storage.profiles)
     newStorage.profiles = [
-      { id: 0, name: 'Default', blacklist: [], whitelist: false, blockMode: 'block', default: true }
+      { id: 0, name: 'Default', blacklist: [], whitelist: false, blockMode: 'standard', default: true }
     ]
   
-  if (!storage.currentProfile)
-    newStorage.currentProfile = 0
+  if (!storage.currentProfiles)
+    newStorage.currentProfiles = []
+  
+  if (!storage.shouldSimplifyProfileModes)
+    newStorage.shouldSimplifyProfileModes = true
 
   await browser.storage.local.set(Object.assign(storage, newStorage))
 }

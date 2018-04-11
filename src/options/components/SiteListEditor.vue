@@ -8,7 +8,7 @@
   export default {
     props: {
       list: {
-        type: Array,
+        type: [Array, Boolean],
         default: () => []
       },
     },

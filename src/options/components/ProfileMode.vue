@@ -25,19 +25,20 @@
     props: {
       mode: {
         type: String,
-        default: 'off'
+        default: 'standard'
       },
     },
     data() {
       return {
         modes: [
-          { name: 'Off', id: 'off', description: 'Blocking is completely off. (Off)' },
-          { name: 'Open', id: 'open', description: 'Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose)' },
-          { name: 'Standard', id: 'standard', description: 'Blocking is enforced by blacklist. No changes can be made to lists. (Standard)' },
-          { name: 'Whitelist', id: 'whitelist', description: 'Follow the profile\'s whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)' },
-          { name: 'Lockdown', id: 'lockdown', description: 'Follow the profile\'s whitelist strictly & block out all other sites. (Most Strict)' },
+          // { name: 'Off', id: 'off', description: 'Blocking is completely off. (Off)' },
+          { name: 'Open', id: 'open', description: 'Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose)', isBasicOption: false },
+          { name: 'Standard', id: 'standard', description: 'Blocking is enforced by blacklist. No changes can be made to lists. (Standard)', isBasicOption: true },
+          { name: 'Whitelist', id: 'whitelist', description: 'Follow the profile\'s whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)', isBasicOption: true },
+          { name: 'Lockdown', id: 'lockdown', description: 'Follow the profile\'s whitelist strictly & block out all other sites. (Most Strict)', isBasicOption: false },
         ],
-        selectedMode: this.mode
+        selectedMode: this.mode,
+        shouldShowAllModes: false
       }
     },
     methods: {
@@ -54,8 +55,15 @@
       },
       selectedNodeIsEqual() {
         return this.selectedMode === this.mode
+      },
+      filteredModes() {
+        return this.shouldShowAllModes ? this.modes : this.modes.filter(m => m.isBasicOption)
       }
     },
+    mounted() {
+      browser.storage.local.get("shouldSimplifyProfileModes")
+        .then(({ shouldSimplifyProfileModes }) => this.shouldShowAllModes = shouldSimplifyProfileModes)
+    }
   }
 </script>
 

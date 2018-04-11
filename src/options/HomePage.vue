@@ -8,7 +8,7 @@
     <!--<quick-action title="Manage your states" description="View and edit saved collections of tabs" pageName="StatesPage"/>-->
     <quick-action title="See all profiles" description="View and manage all created profiles" pageName="ProfilesPage"/>
     <quick-action title="Block off sites" description="Create a profile based on a list of websites to block" pageName="AddProfile"/>
-    <quick-action title="Edit current profile" description="Edit the current profile's site lists, blocking mode, and more" pageName="ViewProfile" :params="{ id: currentProfile }"/>
+    <!--<quick-action title="Edit current profile" description="Edit the current profile's site lists, blocking mode, and more" pageName="ViewProfile" :params="{ id: currentProfile }"/>-->
     <quick-action title="Find help" description="Open the Chronos quickstart with walkthroughs on common actions" pageName="QuickStart"/>
   </div>
 </template>
@@ -18,20 +18,11 @@
 
   export default {
     components: { QuickAction },
-    data() {
-      return {
-        currentProfile: 0
-      }
-    },
     computed: {
       version() {
         return browser.runtime.getManifest().version
       }
     },
-    mounted() {
-      browser.storage.local.get("currentProfile")
-        .then(({ currentProfile }) => this.currentProfile = currentProfile)
-    }
   }
 </script>
 
