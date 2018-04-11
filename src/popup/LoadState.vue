@@ -7,17 +7,17 @@
       <div class="tabs-list__list">
         <popup-tab 
           v-if="!isLoading" 
-          v-for="state in expandArr(savedStates, expandSavedStates)" 
+          v-for="state in expandArr(allStates, expandAllStates)" 
           :key="state.id" :tabData="state" 
           @click="openState(state)"/>
         <div v-if="isLoading" class="tab-item">
           <i class="text-sub text-sub_dimmer">Loading your states...</i>
         </div>
-        <div v-if="!isLoading && !savedStates.length" class="tab-item">
+        <div v-if="!isLoading && !allStates.length" class="tab-item">
           <span class="text-sub text-sub_dimmer">No saved states.</span>
         </div>
-        <div class="tab-item" v-if="savedStates.length > 5" @click="expandSavedStates = !expandSavedStates">
-          <i class="text-sub text-sub_dimmer" v-if="!expandSavedStates">Show more...</i>
+        <div class="tab-item" v-if="allStates.length > 5" @click="expandAllStates = !expandAllStates">
+          <i class="text-sub text-sub_dimmer" v-if="!expandAllStates">Show more...</i>
           <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
         </div>
         <div v-if="!isLoading" class="tab-item cursor-blocked">
@@ -26,9 +26,9 @@
         </div>
       </div>
     </div>
-    <div class="tabs-list">
+    <!--<div class="tabs-list">
       <div class="tabs-list__heading text-sub">
-        <span>Last Deleted Tabs</span>
+        <span>Last Saved Tabs</span>
       </div>
       <div class="tabs-list__list">
         <popup-tab 
@@ -38,17 +38,17 @@
           @click="openState(state)" 
           :titleCharacterLimit="40"/>
         <div v-if="isLoading" class="tab-item">
-          <i class="text-sub text-sub_dimmer">Loading last deleted tabs...</i>
+          <i class="text-sub text-sub_dimmer">Loading last saved tabs...</i>
         </div>
         <div v-if="!isLoading && !lastDeletedStates.length" class="tab-item">
-          <span class="text-sub text-sub_dimmer">No last deleted tabs.</span>
+          <span class="text-sub text-sub_dimmer">No last saved tabs.</span>
         </div>
         <div class="tab-item" v-if="lastDeletedStates.length > 5" @click="expandDeletedStates = !expandDeletedStates">
           <i class="text-sub text-sub_dimmer" v-if="!expandDeletedStates">Show more...</i>
           <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
         </div>
       </div>
-    </div>
+    </div>-->
     <tabs-navigation/>
   </div>
 </template>
@@ -63,6 +63,7 @@
         isLoading: true,
         expandSavedStates: false,
         expandDeletedStates: false,
+        expandAllStates: false,
         allStates: [],
       }
     },

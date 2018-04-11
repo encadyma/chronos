@@ -88,7 +88,7 @@
             return { title: thisTab.title, favIconUrl: thisTab.favIconUrl, url: thisTab.url }
           })
 
-          state.title = 'Last deleted on ' + moment().format('MMM D, YYYY h:mm:ss A')
+          state.title = 'Saved on ' + moment().format('MMM D, YYYY h:mm:ss A')
           state.favIconUrl = '../icons/ic_restore_backup.png'
           state.tabs = resolvedTabs
           state.timestamp = parseInt(moment().format('x'))

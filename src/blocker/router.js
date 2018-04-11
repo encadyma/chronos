@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import BlockPage from './HomePage'
+import BlockPage from './BlockPage'
 
 Vue.use(VueRouter)
 

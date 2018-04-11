@@ -1,11 +1,8 @@
 <template>
   <div class="tabs-options">
     <div class="tabs-options__menu">
-      <!--<div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
+      <div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
         <i class="material-icons">unarchive</i>
-      </div>-->
-      <div v-if="!isSelecting" class="tabs-options__item" title="Open Settings" @click="goToSettings">
-        <i class="material-icons">settings</i>
       </div>
       <!--<div v-if="isSelecting" class="tabs-options__item"
         :class="{ 'tabs-options__item_highlighted_blue': isSaving }"
@@ -20,14 +17,17 @@
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
         <i class="material-icons">close</i>
       </div>
-      <div v-if="!isSelecting" class="tabs-options__item" title="Open New Tab" @click="goAddTab">
+      <!--<div v-if="!isSelecting" class="tabs-options__item" title="Open New Tab" @click="goAddTab">
         <i class="material-icons">add</i>
+      </div>-->
+      <div v-if="!isSelecting" class="tabs-options__item" title="Open Settings" @click="goToSettings">
+        <i class="material-icons">settings</i>
       </div>
       <div class="tabs-options__item"
         :class="{ 'tabs-options__item_highlighted_red': isDeleting }"
-        @click="toggleDeletion" :title="isDeleting ? 'Confirm Deletion' : 'Delete Tabs'">
-        <i class="material-icons" v-if="isDeleting">delete_forever</i>
-        <i class="material-icons" v-else>delete</i>
+        @click="toggleDeletion" :title="isDeleting ? 'Confirm Save & Delete' : 'Save & Delete Tabs'">
+        <i class="material-icons" v-if="isDeleting">archive</i>
+        <i class="material-icons" v-else>archive</i>
       </div>
     </div>
   </div>
