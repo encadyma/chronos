@@ -4,7 +4,7 @@
       <div class="profile-mode-switcher">
         <div 
           class="profile-mode-switcher__profile"
-          v-for="m in modes" :key="m.id" 
+          v-for="m in filteredModes" :key="m.id" 
           :title="m.description" @click="changeMode(m.id)"
           :class="{ selected: m.id === mode, active: m.id === selectedMode && m.id !== mode }">{{m.name}}</div>
       </div>
@@ -62,7 +62,7 @@
     },
     mounted() {
       browser.storage.local.get("shouldSimplifyProfileModes")
-        .then(({ shouldSimplifyProfileModes }) => this.shouldShowAllModes = shouldSimplifyProfileModes)
+        .then(({ shouldSimplifyProfileModes }) => this.shouldShowAllModes = !shouldSimplifyProfileModes)
     }
   }
 </script>
