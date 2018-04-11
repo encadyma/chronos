@@ -7,11 +7,11 @@
       <div v-if="!isSelecting" class="tabs-options__item" title="Open Settings" @click="goToSettings">
         <i class="material-icons">settings</i>
       </div>
-      <div v-if="isSelecting" class="tabs-options__item"
+      <!--<div v-if="isSelecting" class="tabs-options__item"
         :class="{ 'tabs-options__item_highlighted_blue': isSaving }"
         @click="toggleSaving" :title="isSaving ? 'Save Deleted Tabs (Enabled)' : 'Save Deleted Tabs (Disabled)'">
         <i class="material-icons">save</i>
-      </div>
+      </div>-->
     </div>
     <div class="tabs-options__menu">
       <div class="tabs-options__menu__profile">No Profile</div>

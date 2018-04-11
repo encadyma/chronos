@@ -24,11 +24,15 @@
       page: {
         type: String,
         default: null
+      },
+      params: {
+        type: Object,
+        default: () => {}
       }
     },
     methods: {
       goToPage() {
-        if (this.page && !this.isSelected) this.$router.push({ name: this.page })
+        if (this.page && !this.isSelected) this.$router.push({ name: this.page, params: this.params })
       }
     },
     computed: {

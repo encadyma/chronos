@@ -29,11 +29,15 @@
       pageName: {
         type: String,
         default: 'HomePage'
+      },
+      params: {
+        type: Object,
+        default: () => {}
       }
     },
     methods: {
       goToPage() {
-        this.$router.push({ name: this.pageName })
+        this.$router.push({ name: this.pageName, params: this.params })
       }
     },
   }

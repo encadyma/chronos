@@ -1,13 +1,15 @@
 <template>
   <div id="home">
-    <h1>Welcome to Chronos!</h1>
-    <p>Chronos is a tabs extension that can help you spend time productively on the web.</p>
+    <h1>Options</h1>
     <p>This browser is running Chronos {{version}}.</p>
     <br>
-    <h3>Quick Actions</h3>
-    <quick-action title="View all tabs" description="View, edit, and organize tabs across windows" pageName="TabsPage"/>
+    <h3>Quick Actions: I want to...</h3>
+    <quick-action title="View all tabs" description="View tabs across windows" pageName="TabsPage"/>
     <!--<quick-action title="Manage your states" description="View and edit saved collections of tabs" pageName="StatesPage"/>-->
-    <quick-action title="Set up a blacklist" description="Create a profile based on a list of websites to block" pageName="ProfilesPage"/>
+    <quick-action title="See all profiles" description="View and manage all created profiles" pageName="ProfilesPage"/>
+    <quick-action title="Block off sites" description="Create a profile based on a list of websites to block" pageName="AddProfile"/>
+    <quick-action title="Edit current profile" description="Edit the current profile's site lists, blocking mode, and more" pageName="ViewProfile" :params="{ id: currentProfile }"/>
+    <quick-action title="Find help" description="Open the Chronos quickstart with walkthroughs on common actions" pageName="QuickStart"/>
   </div>
 </template>
 
@@ -16,11 +18,20 @@
 
   export default {
     components: { QuickAction },
+    data() {
+      return {
+        currentProfile: 0
+      }
+    },
     computed: {
       version() {
         return browser.runtime.getManifest().version
       }
     },
+    mounted() {
+      browser.storage.local.get("currentProfile")
+        .then(({ currentProfile }) => this.currentProfile = currentProfile)
+    }
   }
 </script>
 

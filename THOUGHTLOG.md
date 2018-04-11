@@ -31,18 +31,18 @@ Description: A productive tab manager doubling as a website blocker. Let online 
   - Ability to "quick-switch" out of states (✓)
   - ~~Ability to save a tab for later~~ (is needed?)
 
-### Profiles -- v3
+### Profiles -- v3 (wip)
 - Profiles dictate what sites the user can access, or what sites should be blocked
   - Whitelist & Blocklist
 - Different modes of working with a profile
   - Lockdown: Follow the Profile's whitelist strictly & block out all other sites. (Most Strict)
   - Whitelist: Follow the profile's whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)
-  - Blacklist: Blocking is enforced by blacklist. No changes can be made to lists. (Standard)
+  - Block: Blocking is enforced by blacklist. No changes can be made to lists. (Standard)
   - Open: Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose)
   - Off: Blocking is completely off. (Off)
 - Simple Icons for Profiles
 
-### Lists -- v4 (should be included?)
+### Lists -- v4 (on hold)
 - Common websites that the user visits
 
 ### Full Release -- v5
