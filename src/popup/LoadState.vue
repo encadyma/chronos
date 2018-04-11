@@ -11,18 +11,26 @@
           :key="state.id" :tabData="state" 
           @click="openState(state)"/>
         <div v-if="isLoading" class="tab-item">
-          <i class="text-sub text-sub_dimmer">Loading your states...</i>
+          <div class="tab-item-inner">
+            <i class="text-sub text-sub_dimmer">Loading your states...</i>
+          </div>
         </div>
         <div v-if="!isLoading && !allStates.length" class="tab-item">
-          <span class="text-sub text-sub_dimmer">No saved states.</span>
+          <div class="tab-item-inner">
+            <span class="text-sub text-sub_dimmer">No saved states.</span>
+          </div>
         </div>
         <div class="tab-item" v-if="allStates.length > 5" @click="expandAllStates = !expandAllStates">
-          <i class="text-sub text-sub_dimmer" v-if="!expandAllStates">Show more...</i>
-          <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
+          <div class="tab-item-inner">
+            <i class="text-sub text-sub_dimmer" v-if="!expandAllStates">Show more...</i>
+            <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
+          </div>
         </div>
         <div v-if="!isLoading" class="tab-item cursor-blocked">
-          <img :src="'../icons/ic_save.png'" class="tab-item__favicon"/>
-          <span>Save new state...</span>
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_save.png'" class="tab-item__favicon"/>
+            <span>Save new state...</span>
+          </div>
         </div>
       </div>
     </div>

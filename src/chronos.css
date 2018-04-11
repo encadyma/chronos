@@ -176,3 +176,22 @@
   padding: 8px 12px;
   min-width: 300px;
 }
+
+.button {
+  background-color: rgb(55, 135, 255);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 12px 20px;
+  min-width: 140px;
+}
+
+.button:hover {
+  background-color: rgb(50, 125, 235);
+}
+
+.button:active {
+  background-color: rgb(45, 115, 215);
+}
