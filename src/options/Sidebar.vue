@@ -6,7 +6,7 @@
     <sidebar-item title="Profiles" icon="business_center" page="ProfilesPage"/>
     <div class="separator-opt"></div>
     <div class="text-sub options-sidebar__heading">Profiles</div>
-    <sidebar-item v-for="profile in profiles" :key="profile.id" :title="profile.name" icon="language" page="ViewProfile" :params="{ id: profile.id }"/>
+    <sidebar-item v-for="profile in profiles" :key="profile.id" :title="profile.name" :icon="profile.icon" page="ViewProfile" :params="{ id: profile.id }" :class="['sidebar-item-profile_' + profile.color]"/>
     <sidebar-item title="Add a profile" icon="add" page="AddProfile"/>
     <div class="separator-opt"></div>
     <div class="text-sub options-sidebar__heading">Help</div>
