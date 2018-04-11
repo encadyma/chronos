@@ -11,6 +11,9 @@
 }
 
 .tab-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: default;
   padding: 6px 16px;
   margin: 0;
@@ -47,13 +50,33 @@
   color: rgb(220, 120, 50);
 }
 
-.tab-item * {
+.tab-item-inner * {
   vertical-align: middle;
 }
 
 .tab-item__favicon {
   height: 20px;
   margin-right: 8px;
+}
+
+.popup-icon-btn {
+  color: #666;
+  font-size: 18px;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.popup-icon-btn:hover {
+  background-color: rgba(100, 100, 100, 0.1);
+}
+
+.tab-item .popup-icon-btn,
+.popup-icon-btn.removed {
+  visibility: hidden;
+}
+
+.tab-item:hover .popup-icon-btn {
+  visibility: visible;
 }
 
 .tabs-options {

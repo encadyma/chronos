@@ -9,9 +9,11 @@
         v-if="!isLoading" v-for="tab in tabs" 
         :key="tab.id" :tabData="tab" 
         @click="clickOnTab(tab)" 
+        @tab-delete="deleteTab(tab.id)"
         :isHighlighted="tab.active" 
         :isActive="tab.active && tab.windowId === currentWindowId" 
         :isSelecting="selectionMode" 
+        :includeTabDeletion="true"
         :isSelected="selectedTabs.indexOf(tab.id) !== -1"/>
       <div v-if="isLoading" class="tab-item">
         <i class="text-sub text-sub_dimmer">Loading all tabs...</i>
@@ -134,6 +136,9 @@
         ).then(() => {
           browser.tabs.update(tabId, { active: true })
         })
+      },
+      deleteTab(tabId) {
+        return browser.tabs.remove(tabId)
       }
     },
     watch: {

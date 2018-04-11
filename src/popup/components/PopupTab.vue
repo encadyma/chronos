@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <div class="tab-item" :class="tabItemClasses" @click="$emit('click')">
+  <div class="tab-item" :class="tabItemClasses" @click="$emit('click')">
+    <div class="tab-item-inner">
       <img :src="favicon" class="tab-item__favicon"/>
       <span>{{ title }}</span>
+    </div>
+    <div v-if="includeTabDeletion" :class="{ removed: isSelecting }" @click="$emit('tab-delete')">
+      <i class="material-icons popup-icon-btn">close</i>
     </div>
   </div>
 </template>
@@ -42,6 +45,10 @@
       titleCharacterLimit: {
         type: Number,
         default: 35
+      },
+      includeTabDeletion: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
