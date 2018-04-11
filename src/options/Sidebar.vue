@@ -1,7 +1,7 @@
 <template>
   <div id="options-sidebar">
     <sidebar-item title="Home" icon="home" page="HomePage"/>
-    <sidebar-item title="Tabs" icon="tab" page="TabsPage"/>
+    <!--<sidebar-item title="Tabs" icon="tab" page="TabsPage"/>-->
     <!--<sidebar-item title="States" icon="archive" page="StatesPage"/>-->
     <sidebar-item title="Profiles" icon="business_center" page="ProfilesPage"/>
     <div class="separator-opt"></div>

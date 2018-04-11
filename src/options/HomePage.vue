@@ -4,7 +4,7 @@
     <p>This browser is running Chronos {{version}}.</p>
     <br>
     <h3>Quick Actions: I want to...</h3>
-    <quick-action title="View all tabs" description="View tabs across windows" pageName="TabsPage"/>
+    <!--<quick-action title="View all tabs" description="View tabs across windows" pageName="TabsPage"/>-->
     <!--<quick-action title="Manage your states" description="View and edit saved collections of tabs" pageName="StatesPage"/>-->
     <quick-action title="See all profiles" description="View and manage all created profiles" pageName="ProfilesPage"/>
     <quick-action title="Block off sites" description="Create a profile based on a list of websites to block" pageName="AddProfile"/>
