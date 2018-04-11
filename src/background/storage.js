@@ -7,7 +7,7 @@ export default async function () {
 
   if (!storage.profiles)
     newStorage.profiles = [
-      { id: 0, name: 'Default', blacklist: [], whitelist: false, blockMode: 'standard', default: true }
+      { id: 0, name: 'Default', blacklist: [], whitelist: [], blockMode: 'standard', default: true }
     ]
   
   if (!storage.currentProfiles)

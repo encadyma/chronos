@@ -8,11 +8,11 @@
     <div class="profile-lists">
       <div class="profile-list">
         <h3>Blacklist</h3>
-        <site-list-editor :list="profile.blacklist"/>
+        <site-list-editor :list="profile.blacklist" @listChange="handleListChange('blacklist', $event)"/>
       </div>
       <div class="profile-list">
         <h3>Whitelist</h3>
-        <site-list-editor :list="profile.whitelist"/>
+        <site-list-editor :list="profile.whitelist" @listChange="handleListChange('whitelist', $event)"/>
       </div>
     </div>
   </div>
@@ -43,6 +43,16 @@
         return browser.storage.local.get("profiles").then((store) => {
           const index = _.findIndex(store.profiles, { id: this.profileId })
           store.profiles[index].mode = mode
+
+          return browser.storage.local.set({
+            profiles: store.profiles
+          })
+        }).then(() => this.loadProfile(this.profileId))
+      },
+      handleListChange(listName, newList) {
+        return browser.storage.local.get("profiles").then((store) => {
+          const index = _.findIndex(store.profiles, { id: this.profileId })
+          store.profiles[index][listName] = newList
 
           return browser.storage.local.set({
             profiles: store.profiles

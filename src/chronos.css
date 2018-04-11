@@ -145,3 +145,11 @@
 .tabs-options__item_highlighted_blue:active {
   color: rgb(25, 75, 175);
 }
+
+.input-text_bare input {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  min-width: 300px;
+}
