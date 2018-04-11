@@ -20,7 +20,8 @@ let config = {
   entry: {
     popup: './src/popup/popup.js',
     options: './src/options/options.js',
-    background: './src/background/index.js'
+    background: './src/background/index.js',
+    blocker: './src/blocker/blocker.js',
   },
   output: {
     filename: '[name]/[name].js',
@@ -92,6 +93,13 @@ let config = {
       filename: 'options/options.html',
       template: 'src/template.html',
       chunks: ['options']
+    }),
+    new HtmlWebpackPlugin({
+      name: 'blocker',
+      title: 'Blocked Page - Chronos',
+      filename: 'blocker/blocker.html',
+      template: 'src/template.html',
+      chunks: ['blocker']
     }),
     new CopyWebpackPlugin([
       { from: 'src/manifest.json' },
