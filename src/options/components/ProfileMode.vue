@@ -30,6 +30,10 @@
       requireConfirmation: {
         type: Boolean,
         default: true
+      },
+      uniqueKey: {
+        type: [String, Number],
+        default: 0
       }
     },
     data() {
@@ -68,6 +72,11 @@
     mounted() {
       browser.storage.local.get("shouldSimplifyProfileModes")
         .then(({ shouldSimplifyProfileModes }) => this.shouldShowAllModes = !shouldSimplifyProfileModes)
+    },
+    watch: {
+      uniqueKey() {
+        this.selectedMode = this.mode
+      }
     }
   }
 </script>

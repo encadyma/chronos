@@ -3,7 +3,7 @@
     <h1>{{profile.name}}</h1>
     <div class="profile-view-modes">
       <label class="text-sub">Default Mode</label>
-      <profile-mode :mode="profileMode" @changeMode="changeMode"/>
+      <profile-mode :mode="profileMode" @changeMode="changeMode" :uniqueKey="profile.id"/>
     </div>
     <div class="profile-lists">
       <div class="profile-list">
@@ -42,7 +42,7 @@
       changeMode(mode) {
         return browser.storage.local.get("profiles").then((store) => {
           const index = _.findIndex(store.profiles, { id: this.profileId })
-          store.profiles[index].mode = mode
+          store.profiles[index].blockMode = mode
 
           return browser.storage.local.set({
             profiles: store.profiles
@@ -68,7 +68,7 @@
         return parseInt(this.$route.params.id)
       },
       profileMode() {
-        return this.profile.mode
+        return this.profile.blockMode
       }
     },
     beforeRouteUpdate(to, from, next) {
