@@ -27,6 +27,10 @@
         type: String,
         default: 'standard'
       },
+      requireConfirmation: {
+        type: Boolean,
+        default: true
+      }
     },
     data() {
       return {
@@ -44,6 +48,7 @@
     methods: {
       changeMode(newMode) {
         this.selectedMode = newMode
+        if (!this.requireConfirmation) this.confirmMode()
       },
       confirmMode() {
         this.$emit('changeMode', this.selectedMode)
@@ -76,6 +81,7 @@
 .profile-mode-switcher-container {
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
 
 .profile-mode-switcher {

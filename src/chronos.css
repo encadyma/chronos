@@ -169,12 +169,31 @@
   color: rgb(25, 75, 175);
 }
 
+.input-text {
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(100, 100, 100, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: 150ms ease;
+}
+
+.input-text input,
 .input-text_bare input {
   background: transparent;
   border: none;
   font-size: 14px;
   padding: 8px 12px;
   min-width: 300px;
+}
+
+.input-text input {
+  border: 4px solid #fdfdfd;
+  padding: 10px 18px;
+  transition: 60ms ease;
+}
+
+.input-text input:focus {
+  border-color: rgb(55, 135, 255);
 }
 
 .button {
@@ -194,4 +213,8 @@
 
 .button:active {
   background-color: rgb(45, 115, 215);
+}
+
+.button.disabled {
+  background-color: rgb(100, 100, 100);
 }

@@ -65,11 +65,15 @@
     },
     computed: {
       profileId() {
-        return this.$route.params.id
+        return parseInt(this.$route.params.id)
       },
       profileMode() {
         return this.profile.mode
       }
+    },
+    beforeRouteUpdate(to, from, next) {
+      this.loadProfile(parseInt(to.params.id))
+      next()
     }
   }
 </script>

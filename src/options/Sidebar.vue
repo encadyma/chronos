@@ -1,16 +1,16 @@
 <template>
   <div id="options-sidebar">
-    <sidebar-item title="Home" icon="home" page="HomePage"/>
+    <sidebar-item title="Home" icon="home" page="/"/>
     <!--<sidebar-item title="Tabs" icon="tab" page="TabsPage"/>-->
     <!--<sidebar-item title="States" icon="archive" page="StatesPage"/>-->
-    <sidebar-item title="Profiles" icon="business_center" page="ProfilesPage"/>
+    <sidebar-item title="Profiles" icon="business_center" page="/profiles"/>
     <div class="separator-opt"></div>
     <div class="text-sub options-sidebar__heading">Profiles</div>
-    <sidebar-item v-for="profile in profiles" :key="profile.id" :title="profile.name" :icon="profile.icon" page="ViewProfile" :params="{ id: profile.id }" :class="['sidebar-item-profile_' + profile.color]"/>
-    <sidebar-item title="Add a profile" icon="add" page="AddProfile"/>
+    <sidebar-item v-for="profile in profiles" :key="profile.id" :title="profile.name" :icon="profile.icon" :page="'/profile/view/' + profile.id" :class="['sidebar-item-profile_' + profile.color]"/>
+    <sidebar-item title="Add a profile" icon="add" page="/profile/add"/>
     <div class="separator-opt"></div>
     <div class="text-sub options-sidebar__heading">Help</div>
-    <sidebar-item title="Quickstart" icon="help" page="QuickStart"/>
+    <sidebar-item title="Quickstart" icon="help" page="/help/quickstart"/>
   </div>
 </template>
 
@@ -33,6 +33,9 @@
     },
     mounted() {
       this.getProfiles()
+      browser.storage.onChanged.addListener((changes, areaName) => {
+        if (changes.profiles) this.getProfiles()
+      })
     }
   }
 </script>

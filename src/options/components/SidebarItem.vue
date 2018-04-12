@@ -25,19 +25,17 @@
         type: String,
         default: null
       },
-      params: {
-        type: Object,
-        default: () => {}
-      }
     },
     methods: {
       goToPage() {
-        if (this.page && !this.isSelected) this.$router.push({ name: this.page, params: this.params })
+        if (this.page) {
+          this.$router.push(this.page)
+        }
       }
     },
     computed: {
       isSelected() {
-        return this.$route.name == this.page
+        return this.$route.path == this.page
       }
     },
   }
