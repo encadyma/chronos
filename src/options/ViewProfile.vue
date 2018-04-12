@@ -15,6 +15,8 @@
         <site-list-editor :list="profile.whitelist" @listChange="handleListChange('whitelist', $event)"/>
       </div>
     </div>
+    <div class="text-sub profile-view-delete-btn" @click="hasDoubleClickedDelete = true" v-if="!profile.default && !hasDoubleClickedDelete">Delete this profile (irreversable)</div>
+    <div class="text-sub profile-view-delete-btn" @click="deleteProfile" v-if="!profile.default && hasDoubleClickedDelete">Click this message again to confirm deleting this profile.</div>
   </div>
 </template>
 
@@ -30,6 +32,7 @@
       return {
         profile: null,
         isLoading: true,
+        hasDoubleClickedDelete: false
       }
     },
     methods: {
@@ -58,6 +61,18 @@
             profiles: store.profiles
           })
         }).then(() => this.loadProfile(this.profileId))
+      },
+      deleteProfile() {
+        if (this.profile.default) return false
+
+        return browser.storage.local.get("profiles").then((store) => {
+          const index = _.findIndex(store.profiles, { id: this.profileId })
+          store.profiles[index].isDeleted = true
+
+          return browser.storage.local.set({
+            profiles: store.profiles
+          })
+        }).then(() => this.$router.push('/profiles'))
       }
     },
     mounted() {
@@ -73,6 +88,7 @@
     },
     beforeRouteUpdate(to, from, next) {
       this.loadProfile(parseInt(to.params.id))
+      this.hasDoubleClickedDelete = false
       next()
     }
   }
@@ -87,5 +103,17 @@
 
 .profile-view-modes .text-sub {
   margin-right: 40px;
+}
+
+.profile-view-delete-btn {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+.profile-view-delete-btn:hover {
+  color: rgba(220, 30, 30, 0.8);
 }
 </style>

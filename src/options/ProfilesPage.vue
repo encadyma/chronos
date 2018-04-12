@@ -19,7 +19,7 @@
     },
     mounted() {
       browser.storage.local.get("profiles")
-        .then((store) => this.profiles = store.profiles)
+        .then((store) => this.profiles = store.profiles.filter(i => !i.isDeleted))
     },
     methods: {
       goToProfile(profileId) {

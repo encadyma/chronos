@@ -27,7 +27,7 @@
     methods: {
       getProfiles() {
         browser.storage.local.get("profiles").then((state) => {
-          this.profiles = state.profiles
+          this.profiles = state.profiles.filter(i => !i.isDeleted)
         })
       }
     },
