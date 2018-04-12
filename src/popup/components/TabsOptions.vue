@@ -11,7 +11,7 @@
       </div>-->
     </div>
     <div class="tabs-options__menu">
-      <div class="tabs-options__menu__profile">No Profile</div>
+      <div class="tabs-options__menu__profile" @click="goToProfiles">{{profileTitles}} ({{profileMode}})</div>
     </div>
     <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     props: {
       isDeleting: {
@@ -44,6 +46,12 @@
         type: Boolean,
         default: true
       },
+    },
+    data() {
+      return {
+        profileRawMode: 'off',
+        modeTitles: []
+      }
     },
     methods: {
       toggleDeletion() {
@@ -67,11 +75,41 @@
       },
       goToSettings() {
         browser.tabs.create({ url: '/options/options.html' })
+      },
+      goToProfiles() {
+        this.$router.push({ name: 'ChangeProfile' })
+      },
+      getCurrentProfile() {
+        return browser.storage.local.get(["currentProfiles", "profiles"]).then(store => {
+          this.modeTitles = store.currentProfiles
+            .map(pid => _.find(store.profiles, { id: pid }))
+            .map(p => p.name)
+          
+          this.profileRawMode = _.find(store.profiles, p => store.currentProfiles.indexOf(p.id) > -1).blockMode
+        })
+      },
+      limitCharacterLength(str) {
+        return str.length > 18 ? str.substr(0, 16) + '..' : str
       }
+    },
+    mounted() {
+      this.getCurrentProfile()
     },
     computed: {
       isSelecting() {
         return this.isDeleting 
+      },
+      profileMode() {
+        if (!this.profileRawMode) return 'Off'
+        else if (this.profileRawMode === 'open') return 'Open'
+        else if (this.profileRawMode === 'standard') return 'Standard'
+        else if (this.profileRawMode === 'whitelist') return 'Whitelist'
+        else if (this.profileRawMode === 'lockdown') return 'Lockdown'
+        else return 'Off'
+      },
+      profileTitles() {
+        if (this.modeTitles.length === 0) return 'No Profile'
+        return this.limitCharacterLength(this.modeTitles.join(' ,'))
       }
     },
   }

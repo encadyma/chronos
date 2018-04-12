@@ -1,31 +1,52 @@
 <template>
-  <div class="tabs-list">
-    <div class="tabs-list__heading text-sub">
-      <span>Your Tabs</span>
-      <span v-if="selectionMode"> ({{selectedTabs.length}} tabs selected)</span>
-    </div>
-    <div class="tabs-list__list">
-      <popup-tab 
-        v-if="!isLoading" v-for="tab in tabs" 
-        :key="tab.id" :tabData="tab" 
-        @click="clickOnTab(tab)" 
-        @tab-delete="deleteTab(tab.id)"
-        :isHighlighted="tab.active" 
-        :isActive="tab.active && tab.windowId === currentWindowId" 
-        :isSelecting="selectionMode" 
-        :includeTabDeletion="true"
-        :isSelected="selectedTabs.indexOf(tab.id) !== -1"/>
-      <div v-if="isLoading" class="tab-item">
-        <i class="text-sub text-sub_dimmer">Loading all tabs...</i>
+  <div>
+    <div class="tabs-list">
+      <div class="tabs-list__heading text-sub">
+        <span>Your Tabs</span>
+        <span v-if="selectionMode"> ({{selectedTabs.length}} tabs selected)</span>
+      </div>
+      <div class="tabs-list__list">
+        <popup-tab 
+          v-if="!isLoading" v-for="tab in tabs" 
+          :key="tab.id" :tabData="tab" 
+          @click="clickOnTab(tab)" 
+          @tab-delete="deleteTab(tab.id)"
+          :isHighlighted="tab.active" 
+          :isActive="tab.active && tab.windowId === currentWindowId" 
+          :isSelecting="selectionMode" 
+          :includeTabDeletion="true"
+          :isSelected="selectedTabs.indexOf(tab.id) !== -1"/>
+        <div v-if="isLoading" class="tab-item">
+          <i class="text-sub text-sub_dimmer">Loading all tabs...</i>
+        </div>
       </div>
     </div>
-    <tabs-options 
-      @tab-options-deletion-execute="deleteHighlightedTabs"
-      @tab-options-deletion-enable="enableDeletion"
-      @tab-options-action-disable="disableAction"
-      @tab-options-deletion-toggle-save="shouldSaveTabs = !shouldSaveTabs"
-      :isDeleting="isDeleting"
-      :isSaving="shouldSaveTabs"/>
+    <div class="tabs-list">
+      <div class="tabs-list__heading text-sub">
+        <span>Actions</span>
+      </div>
+      <div class="tabs-list__list">
+        <div class="tab-item">
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_help.png'" class="tab-item__favicon"/>
+            <span>Get started! Open the quickstart..</span>
+          </div>
+        </div>
+        <div class="tab-item">
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_restore_page.png'" class="tab-item__favicon"/>
+            <span>Archive this window for later</span>
+          </div>
+        </div>
+      </div>
+      <tabs-options 
+        @tab-options-deletion-execute="deleteHighlightedTabs"
+        @tab-options-deletion-enable="enableDeletion"
+        @tab-options-action-disable="disableAction"
+        @tab-options-deletion-toggle-save="shouldSaveTabs = !shouldSaveTabs"
+        :isDeleting="isDeleting"
+        :isSaving="shouldSaveTabs"/>
+    </div>
   </div>
 </template>
 

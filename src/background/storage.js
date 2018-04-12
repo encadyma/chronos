@@ -16,5 +16,8 @@ export default async function () {
   if (!storage.shouldSimplifyProfileModes)
     newStorage.shouldSimplifyProfileModes = true
 
+  if (!storage.hasAccessedQuickstart)
+    newStorage.hasAccessedQuickstart = false
+
   await browser.storage.local.set(Object.assign(storage, newStorage))
 }
