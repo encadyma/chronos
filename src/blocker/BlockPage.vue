@@ -1,7 +1,7 @@
 <template>
   <div class="blocker-page">
     <h1>Blocked Page</h1>
-    <p><b>This website is blocked</b> under your current profile.</p><br>
+    <p><b>{{websiteName}} is blocked</b> under your current profile.</p><br>
     <button class="button" @click="goToPreviousBrowserPage">Go Back</button><br>
     <div class="blocker-page-actions">
       <a class="blocker-second-action" :href="optionsLink">Go to options</a>
@@ -15,7 +15,7 @@
   export default {
     methods: {
       goToPreviousBrowserPage() {
-        window.history.back()
+        window.history.go(-1)
       }
     },
     computed: {
@@ -24,6 +24,10 @@
       },
       version() {
         return browser.runtime.getManifest().version
+      },
+      websiteName() {
+        if (!this.$route.query.hostname) return 'This website'
+        return this.$route.query.hostname
       }
     }
   }

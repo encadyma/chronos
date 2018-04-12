@@ -10,8 +10,8 @@ export default async function () {
       { id: 0, name: 'Default', icon: 'language', color: 'black', blacklist: [], whitelist: [], blockMode: 'standard', default: true, isDeleted: false }
     ]
   
-  if (!storage.currentProfiles)
-    newStorage.currentProfiles = []
+  if (!storage.currentProfiles || true)
+    newStorage.currentProfiles = [0]
   
   if (!storage.shouldSimplifyProfileModes)
     newStorage.shouldSimplifyProfileModes = true
