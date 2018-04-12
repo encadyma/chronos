@@ -6,20 +6,28 @@
       </div>
       <div class="tabs-list__list">
         <div class="tab-item cursor-blocked">
-          <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
-          <span>Edit state...</span>
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
+            <span>Edit state...</span>
+          </div>
         </div>
         <div class="tab-item" @click="openStateInCurrentWindow(tabs)">
-          <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
-          <span>Add tabs to current window</span>
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
+            <span>Add tabs to current window</span>
+          </div>
         </div>
         <div class="tab-item" @click="openStateInNewWindow">
-          <img :src="'../icons/ic_open_in_new.png'" class="tab-item__favicon"/>
-          <span>Open tabs in new window</span>
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_open_in_new.png'" class="tab-item__favicon"/>
+            <span>Open tabs in new window</span>
+          </div>
         </div>
         <div class="tab-item" @click="openStateByReplacingWindow">
-          <img :src="'../icons/ic_swap_vert.png'" class="tab-item__favicon"/>
-          <span>Replace this window with saved tabs</span>
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_swap_vert.png'" class="tab-item__favicon"/>
+            <span>Replace this window with saved tabs</span>
+          </div>  
         </div>
       </div>
     </div>
