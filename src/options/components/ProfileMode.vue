@@ -40,10 +40,10 @@
       return {
         modes: [
           // { name: 'Off', id: 'off', description: 'Blocking is completely off. (Off)' },
-          { name: 'Open', id: 'open', description: 'Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose)', isBasicOption: false },
-          { name: 'Standard', id: 'standard', description: 'Blocking is enforced by blacklist. No changes can be made to lists. (Standard)', isBasicOption: true },
-          { name: 'Whitelist', id: 'whitelist', description: 'Follow the profile\'s whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)', isBasicOption: true },
-          { name: 'Lockdown', id: 'lockdown', description: 'Follow the profile\'s whitelist strictly & block out all other sites. (Most Strict)', isBasicOption: false },
+          { name: 'Open', id: 'open', description: 'Blocking is loosely enforced by blacklist. Blacklisted sites can be visited temporarily and added to the white list. (Loose)', isBasicOption: false },
+          { name: 'Standard', id: 'standard', description: 'Blocking is enforced by blacklist. All blacklisted sites cannot be accessed. (Standard)', isBasicOption: true },
+          { name: 'Whitelist', id: 'whitelist', description: 'Follow the profile\'s whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)', isBasicOption: false },
+          { name: 'Lockdown', id: 'lockdown', description: 'Follow the profile\'s whitelist strictly & block out all other sites. (Most Strict)', isBasicOption: true },
         ],
         selectedMode: this.mode,
         shouldShowAllModes: false

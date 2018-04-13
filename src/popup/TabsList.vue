@@ -26,13 +26,16 @@
         <span>Actions</span>
       </div>
       <div class="tabs-list__list">
-        <div class="tab-item">
+        <div class="tab-item" 
+          :class="[currentActionClasses, { 'tab-item_selected_blinking' : !hasAccessedQuickstart }]" 
+          :disabled="selectionMode" @click="openQuickStart">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_help.png'" class="tab-item__favicon"/>
-            <span>Get started! Open the quickstart..</span>
+            <span v-if="!hasAccessedQuickstart">New user? Open the quickstart!</span>
+            <span v-else>Open the quickstart</span>
           </div>
         </div>
-        <div class="tab-item">
+        <div class="tab-item" :class="currentActionClasses" :disabled="selectionMode">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_restore_page.png'" class="tab-item__favicon"/>
             <span>Archive this window for later</span>
@@ -45,7 +48,8 @@
         @tab-options-action-disable="disableAction"
         @tab-options-deletion-toggle-save="shouldSaveTabs = !shouldSaveTabs"
         :isDeleting="isDeleting"
-        :isSaving="shouldSaveTabs"/>
+        :isSaving="shouldSaveTabs"
+        :stateHasUnreadMsg="hasNewState"/>
     </div>
   </div>
 </template>
@@ -64,7 +68,9 @@
         selectedTabs: [],
         isLoading: true,
         shouldSaveTabs: true,
-        tabs: []
+        hasAccessedQuickstart: true,
+        tabs: [],
+        hasNewState: false
       }
     },
     components: { PopupTab, TabsOptions },
@@ -77,6 +83,9 @@
       browser.tabs.onActivated.addListener(this.updateTabs)
       browser.tabs.onRemoved.addListener(this.updateTabsOnRemoval)
       this.updateTabs()
+
+      browser.storage.local.get("hasAccessedQuickstart")
+        .then((s) => this.hasAccessedQuickstart = s.hasAccessedQuickstart)
     },
     methods: {
       updateTabs() {  // Update the tab listings
@@ -93,11 +102,16 @@
       },
       deleteHighlightedTabs() {
         this.saveSelectedTabsAsState(this.selectedTabs).then(() => {
-          browser.tabs.remove(this.selectedTabs).then(() => {
+          // Deleting tab code -- temporarily removing this.
+          /*browser.tabs.remove(this.selectedTabs).then(() => {
             this.selectedTabs = []
             this.selectionMode = false
             this.isDeleting = false
-          })
+          })*/
+          this.selectedTabs = []
+          this.selectionMode = false
+          this.isDeleting = false
+          this.hasNewState = true
         })
       },
       saveSelectedTabsAsState(tabs) {
@@ -160,7 +174,13 @@
       },
       deleteTab(tabId) {
         return browser.tabs.remove(tabId)
-      }
+      },
+      openQuickStart() {
+        if (this.selectionMode) return
+
+        browser.tabs.create({ url: '/options/options.html#/help/quickstart' })
+        this.hasAccessedQuickstart = true
+      },
     },
     watch: {
       tabs(newValue, oldValue) {    
@@ -172,6 +192,11 @@
         }
       }
     },
+    computed: {
+      currentActionClasses() {
+        return { 'cursor-blocked': this.selectionMode }
+      }
+    }
   }
 </script>
 

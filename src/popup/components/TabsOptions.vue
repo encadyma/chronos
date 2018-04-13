@@ -1,7 +1,10 @@
 <template>
   <div class="tabs-options">
     <div class="tabs-options__menu">
-      <div v-if="!isSelecting" class="tabs-options__item" title="Load State" @click="goLoadState">
+      <div v-if="!isSelecting"
+        class="tabs-options__item"
+        title="Load State" @click="goLoadState"
+        :class="{ 'tabs-options__item_popout': stateHasUnreadMsg }">
         <i class="material-icons">unarchive</i>
       </div>
       <!--<div v-if="isSelecting" class="tabs-options__item"
@@ -10,8 +13,11 @@
         <i class="material-icons">save</i>
       </div>-->
     </div>
-    <div class="tabs-options__menu">
+    <div class="tabs-options__menu" v-if="!isDeleting">
       <div class="tabs-options__menu__profile" @click="goToProfiles">{{profileTitles}} ({{profileMode}})</div>
+    </div>
+    <div class="tabs-options__menu" v-else>
+      <div class="tabs-options__menu__bubble_helptext">Select tabs to save.</div>
     </div>
     <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">
@@ -25,7 +31,7 @@
       </div>
       <div class="tabs-options__item"
         :class="{ 'tabs-options__item_highlighted_red': isDeleting }"
-        @click="toggleDeletion" :title="isDeleting ? 'Confirm Save & Delete' : 'Save & Delete Tabs'">
+        @click="toggleDeletion" :title="isDeleting ? 'Confirm Save' : 'Save Tabs'">
         <i class="material-icons" v-if="isDeleting">archive</i>
         <i class="material-icons" v-else>archive</i>
       </div>
@@ -46,6 +52,10 @@
         type: Boolean,
         default: true
       },
+      stateHasUnreadMsg: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {

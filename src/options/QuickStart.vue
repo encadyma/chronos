@@ -10,3 +10,11 @@ p {
   line-height: 1.5;
 }
 </style>
+
+<script>
+export default {
+  mounted() {
+    browser.storage.local.set({ hasAccessedQuickstart: true })
+  }
+}
+</script>
