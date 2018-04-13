@@ -103,7 +103,8 @@ let config = {
     }),
     new CopyWebpackPlugin([
       { from: 'src/manifest.json' },
-      { from: 'src/icons/', to: 'icons/' }
+      { from: 'src/icons/', to: 'icons/' },
+      { from: 'src/screenshots', to: 'screenshots/' }
     ]),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],

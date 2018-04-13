@@ -35,10 +35,16 @@
             <span v-else>Open the quickstart</span>
           </div>
         </div>
-        <div class="tab-item" :class="currentActionClasses" :disabled="selectionMode">
+        <div class="tab-item" :class="currentActionClasses" :disabled="selectionMode" @click="saveAndCloseWindow">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_restore_page.png'" class="tab-item__favicon"/>
-            <span>Archive this window for later</span>
+            <span>Save & close this window for later</span>
+          </div>
+        </div>
+        <div class="tab-item" :class="currentActionClasses" :disabled="selectionMode" @click="goAddTab">
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
+            <span>Open new tab</span>
           </div>
         </div>
       </div>
@@ -111,10 +117,9 @@
           this.selectedTabs = []
           this.selectionMode = false
           this.isDeleting = false
-          this.hasNewState = true
         })
       },
-      saveSelectedTabsAsState(tabs) {
+      saveSelectedTabsAsState(tabs) {     // <== tabs: [<tab-ids>, ...]
         if (!tabs.length) return Promise.resolve(true)
         if (!this.shouldSaveTabs) return Promise.resolve(true)
 
@@ -130,9 +135,11 @@
           state.tabs = resolvedTabs
           state.timestamp = parseInt(moment().format('x'))
           state.type = 'last_deleted'
+          state.isDeleted = false
 
           return browser.storage.local.get("states").then((store) => {
             state.id = store.states.length + 1
+            this.hasNewState = true
             return browser.storage.local.set({
               states: [state].concat(store.states)
             }).then(resolve)
@@ -181,6 +188,26 @@
         browser.tabs.create({ url: '/options/options.html#/help/quickstart' })
         this.hasAccessedQuickstart = true
       },
+      goAddTab() {
+        if (this.selectionMode) return
+
+        this.$router.push({ name: 'AddTab' })
+      },
+      saveAndCloseWindow() {
+        if (this.selectionMode) return
+
+        const currentWindowTabs = this.tabs
+          .filter(t => t.windowId === this.currentWindowId)
+          .map(t => t.id)
+
+        this.saveSelectedTabsAsState(currentWindowTabs).then(() => {
+          browser.tabs.remove(currentWindowTabs).then(() => {
+            this.selectedTabs = []
+            this.selectionMode = false
+            this.isDeleting = false
+          })
+        })
+      }
     },
     watch: {
       tabs(newValue, oldValue) {    

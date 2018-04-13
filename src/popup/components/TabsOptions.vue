@@ -17,7 +17,7 @@
       <div class="tabs-options__menu__profile" @click="goToProfiles">{{profileTitles}} ({{profileMode}})</div>
     </div>
     <div class="tabs-options__menu" v-else>
-      <div class="tabs-options__menu__bubble_helptext">Select tabs to save.</div>
+      <div class="tabs-options__menu__bubble_helptext">Select tabs to save. Click icon again to confirm.</div>
     </div>
     <div class="tabs-options__menu">
       <div v-if="isSelecting" class="tabs-options__item" title="Cancel" @click="cancelAction">

@@ -12,7 +12,7 @@ Description: A productive tab manager doubling as a website blocker. Let online 
   - Add Tab (✓)
   - Delete Tab (✓)
 
-### Data Storage -- v2 (wip)
+### Data Storage -- v2 (on hold)
 - Data storage system should track tab history (on hold)
   - Should track:
     - When a user creates a new tab (HISTORY_TAB_CREATE)
@@ -31,16 +31,17 @@ Description: A productive tab manager doubling as a website blocker. Let online 
   - Ability to "quick-switch" out of states (✓)
   - ~~Ability to save a tab for later~~ (is needed?)
 
-### Profiles -- v3 (wip)
-- Profiles dictate what sites the user can access, or what sites should be blocked
-  - Whitelist & Blocklist
-- Different modes of working with a profile
-  - Lockdown: Follow the Profile's whitelist strictly & block out all other sites. (Most Strict)
-  - Whitelist: Follow the profile's whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict)
-  - Block: Blocking is enforced by blacklist. No changes can be made to lists. (Standard)
-  - Open: Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose)
-  - Off: Blocking is completely off. (Off)
-- Simple Icons for Profiles
+### Profiles -- v3 (release OK, still some left)
+- Profiles dictate what sites the user can access, or what sites should be blocked (✓)
+  - Whitelist & Blocklist (✓)
+- Different modes of working with a profile 
+  - Lockdown: Follow the Profile's whitelist strictly & block out all other sites. (Most Strict) (✓)
+  - Whitelist: Follow the profile's whitelist and prompt users case-by-case when visiting non-whitelisted websites. (Strict) (wip)
+  - Block: Blocking is enforced by blacklist. No changes can be made to lists. (Standard) (✓)
+  - Open: Blocking is loosely enforced by blacklist. Sites can be visited temporarily and added to the white list. (Loose) (wip)
+  - ~~Off: Blocking is completely off. (Off)~~ (removed)
+- Simple Icons for Profiles (✓)
+- Simple Colors for Profiles
 
 ### Lists -- v4 (on hold)
 - Common websites that the user visits
@@ -56,7 +57,7 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 - Folders, Subfolders for States
 - For big States: Instead of restoring all pages, load a single page with list of tab names
 - Custom Block pages
-  - Basic Blocked Page
+  - Basic Blocked Page (✓)
   - Recommended Sites Page
   - Motivational Quote Page
   - Scoreboard Page
@@ -74,5 +75,5 @@ Description: A productive tab manager doubling as a website blocker. Let online 
 
 ### Buglist -- vNOW
 - Windows do not activate/focus when switching tabs across windows
-- When transitioning to LoadStates page, the window adjusts width slightly.. readjust min-width instead
+- When transitioning to LoadStates page, the window adjusts width slightly.. readjust min-width instead (✓)
 - Get rid of "You are running Vue in development mode." message

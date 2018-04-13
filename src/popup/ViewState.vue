@@ -5,12 +5,12 @@
         <span>Actions</span>
       </div>
       <div class="tabs-list__list">
-        <div class="tab-item cursor-blocked">
+        <!--<div class="tab-item cursor-blocked">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
             <span>Edit state...</span>
           </div>
-        </div>
+        </div>-->
         <div class="tab-item" @click="openStateInCurrentWindow(tabs)">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_add.png'" class="tab-item__favicon"/>
@@ -28,6 +28,12 @@
             <img :src="'../icons/ic_swap_vert.png'" class="tab-item__favicon"/>
             <span>Replace this window with saved tabs</span>
           </div>  
+        </div>
+        <div class="tab-item" @click="deleteState">
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_delete.png'" class="tab-item__favicon"/>
+            <span>Delete this state</span>
+          </div>
         </div>
       </div>
     </div>
@@ -57,6 +63,7 @@
 <script>
   import PopupTab from './components/PopupTab'
   import TabsNavigation from './components/TabsNavigation'
+  import _ from 'lodash'
 
   export default {
     data() {
@@ -108,6 +115,16 @@
           browser.tabs.create({ url: this.tabs[0].url })
             .then(({ id }) => browser.tabs.remove(currentTabIds))
             .then(_ => this.openStateInCurrentWindow(this.tabs.slice(1, this.tabs.length)))
+        })
+      },
+      deleteState() {
+        browser.storage.local.get("states").then((store) => {
+          const index = _.findIndex(store.states, { id: this.currentState.id })
+          store.states[index].isDeleted = true
+
+          return browser.storage.local.set(store)
+        }).then(() => {
+          this.$router.go(-1)
         })
       }
     },

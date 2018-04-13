@@ -26,12 +26,12 @@
             <i class="text-sub text-sub_dimmer" v-else>Show less...</i>
           </div>
         </div>
-        <div v-if="!isLoading" class="tab-item cursor-blocked">
+        <!--<div v-if="!isLoading" class="tab-item cursor-blocked">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_save.png'" class="tab-item__favicon"/>
             <span>Save new state...</span>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <!--<div class="tabs-list">
@@ -78,7 +78,7 @@
     components: { PopupTab, TabsNavigation },
     mounted() {
       browser.storage.local.get("states").then((store) => {
-        this.allStates = store.states || []
+        this.allStates = store.states.filter(s => !s.isDeleted) || []
         this.isLoading = false
       })
     },
