@@ -241,7 +241,7 @@
 .tabs-list__list {
   padding: 0;
   margin: 0;
-  max-height: 400px;
+  max-height: 380px;
   overflow-y: auto;
 }
 </style>

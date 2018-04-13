@@ -50,8 +50,10 @@ export default {
     const foundInActiveList = _blockerConfig.activeList.indexOf(hostname) > -1
     
     if (this.usesBlacklist(_blockerConfig.blockMode) && foundInActiveList) {
+      console.log("[chronos] Blocking " + hostname + ": found in profile blacklist")
       await browser.tabs.update(tabId, { url: `/blocker/blocker.html#/block?hostname=${hostname}`, loadReplace: true })
     } else if (this.usesWhitelist(_blockerConfig.blockMode) && !foundInActiveList) {
+      console.log("[chronos] Blocking " + hostname + ": not found in profile whitelist")
       await browser.tabs.update(tabId, { url: `/blocker/blocker.html#/block?hostname=${hostname}`, loadReplace: true })
     }
   },
