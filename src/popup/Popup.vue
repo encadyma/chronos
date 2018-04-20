@@ -1,5 +1,6 @@
 <template>
   <div>
+    <tab-header/>
     <router-view/>
   </div>
 </template>
@@ -9,7 +10,11 @@
   import '../reset.css'
   import '../chronos.css'
 
-  export default {}
+  import TabHeader from './components/TabHeader'
+
+  export default {
+    components: { TabHeader }
+  }
 </script>
 
 <style scoped>

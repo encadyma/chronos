@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>-->
-    <tabs-navigation/>
+    <!--<tabs-navigation/>-->
   </div>
 </template>
 

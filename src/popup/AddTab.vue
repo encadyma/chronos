@@ -5,7 +5,7 @@
         <span>Suggested Sites</span>
       </div>
       <div class="tabs-list__list">
-        <popup-tab v-for="tab in suggestedTabs" :key="tab.id" :tabData="tab" @click="openSite(tab.url)"/>
+        <popup-tab v-for="tab in suggestedTabs" :key="tab.id" :tabData="tab" @click="openSite(tab.url, tab.inNewWindow)"/>
       </div>
     </div>
     <div class="tabs-list">
@@ -23,7 +23,6 @@
         </div>
       </div>
     </div>
-    <tabs-navigation/>
   </div>
 </template>
 
@@ -36,8 +35,9 @@
       return {
         isLoading: true,
         suggestedTabs: [
-          { favIconUrl: '../icons/tab_matds.png', title: 'Open blank new tab' },
-          { favIconUrl: '../icons/ic_settings.png', title: 'Extension Settings...', url: '/options/options.html' },
+          { favIconUrl: '../icons/tab_matds.png', title: 'Open blank new tab', inNewWindow: false },
+          { favIconUrl: '../icons/ic_open_in_new.png', title: 'Open new window...', inNewWindow: true },
+          { favIconUrl: '../icons/ic_settings.png', title: 'Extension Settings...', url: '/options/options.html', inNewWindow: false },
         ],
         topSites: [],
         expandAll: false
@@ -55,8 +55,9 @@
       })
     },
     methods: {
-      openSite(url) {
-        browser.tabs.create({ url: url })
+      openSite(url, inNewWindow) {
+        if (!inNewWindow) browser.tabs.create({ url: url })
+        else browser.windows.create({ url: url })
       }
     },
     computed: {

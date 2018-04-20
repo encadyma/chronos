@@ -1,5 +1,34 @@
 <template>
   <div>
+    <div class="tabs-status" :class="{ dimmed: selectionMode }">
+      <div class="tabs-status-flex">
+        <div class="tabs-status__section">
+          <div class="tabs-status-section-heading">
+            <span v-if="selectionMode">{{selectedTabs.length}} tabs selected</span>
+            <span v-else>{{tabs.length}} tabs open</span>
+          </div>
+          <div class="tabs-status-section-subheading">
+            <span v-if="selectionMode">
+              <span>Select which tabs to save.</span>
+            </span>
+            <span v-else class="tabs-status-section-clickable" @click="goToStates">Open new state...</span>
+          </div>
+        </div>
+        <div class="tabs-status__section">
+          <i class="tabs-status__section__action_btn material-icons"
+            @click="disableAction" title="Cancel"
+            v-if="selectionMode">close</i>
+          <i class="tabs-status__section__action_btn material-icons"
+            @click="deleteHighlightedTabs" title="Save and close tabs"
+            v-if="selectionMode">restore_page</i>
+          <i class="tabs-status__section__action_btn material-icons"
+            @click="openQuickStart" title="Open quickstart in new tab"
+            v-if="!selectionMode">info</i>
+          <i class="tabs-status__section__action_btn material-icons"
+            @click="emitDeletion" title="Save new state">archive</i>
+        </div>
+      </div>
+    </div>
     <div class="tabs-list">
       <div class="tabs-list__heading text-sub">
         <span>Your Tabs</span>
@@ -48,17 +77,117 @@
           </div>
         </div>
       </div>
-      <tabs-options 
-        @tab-options-deletion-execute="deleteHighlightedTabs"
+      <!--<tabs-options 
+        @tab-options-deletion-execute="archiveHighlightedTabs"
         @tab-options-deletion-enable="enableDeletion"
         @tab-options-action-disable="disableAction"
         @tab-options-deletion-toggle-save="shouldSaveTabs = !shouldSaveTabs"
         :isDeleting="isDeleting"
         :isSaving="shouldSaveTabs"
-        :stateHasUnreadMsg="hasNewState"/>
+        :stateHasUnreadMsg="hasNewState"/>-->
     </div>
   </div>
 </template>
+
+<style scoped>
+.tabs-list {
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.tabs-list__heading {
+  padding: 4px 16px;
+}
+
+.tabs-list__list {
+  padding: 0;
+  margin: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.tabs-status {
+  background-color: rgb(30, 100, 205);
+  color: #fff;
+  padding: 12px 20px;
+  transition: 100ms ease;
+}
+
+.tabs-status.dimmed {
+  background-color: rgb(165, 20, 20);
+}
+
+.tabs-status-section-heading {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.tabs-status-section-subheading {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 2px 0;
+}
+
+.tabs-status-section-clickable {
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tabs-status-section-clickable:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tabs-status-section-clickable.disabled {
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed;
+}
+
+.tabs-status__section__action_btn {
+  border-radius: 4px;
+  font-size: 24px;
+  padding: 3px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tabs-status__section__action_btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tabs-status-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabs-status__section__action_btn:after {
+  background-color: rgb(30, 30, 30);
+  color: rgb(255, 255, 255);
+  content: attr(title);
+  cursor: default;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: absolute;
+  bottom: -28px;
+  right: 0%;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 2px;
+  visibility: hidden;
+  opacity: 0;
+  transition: 150ms ease;
+}
+
+.tabs-status__section__action_btn:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
 
 <script>
   import PopupTab from './components/PopupTab'
@@ -109,11 +238,15 @@
       deleteHighlightedTabs() {
         this.saveSelectedTabsAsState(this.selectedTabs).then(() => {
           // Deleting tab code -- temporarily removing this.
-          /*browser.tabs.remove(this.selectedTabs).then(() => {
+          browser.tabs.remove(this.selectedTabs).then(() => {
             this.selectedTabs = []
             this.selectionMode = false
             this.isDeleting = false
-          })*/
+          })
+        })
+      },
+      archiveHighlightedTabs() {
+        this.saveSelectedTabsAsState(this.selectedTabs).then(() => {
           this.selectedTabs = []
           this.selectionMode = false
           this.isDeleting = false
@@ -207,6 +340,16 @@
             this.isDeleting = false
           })
         })
+      },
+      emitDeletion() {
+        if (this.isDeleting) {
+          this.archiveHighlightedTabs();
+        } else {
+          this.enableDeletion();
+        }
+      },
+      goToStates() {
+        this.$router.push({ name: 'LoadState' })
       }
     },
     watch: {
@@ -226,22 +369,3 @@
     }
   }
 </script>
-
-<style scoped>
-.tabs-list {
-  font-size: 14px;
-  padding-top: 8px;
-  padding-bottom: 4px;
-}
-
-.tabs-list__heading {
-  padding: 4px 16px;
-}
-
-.tabs-list__list {
-  padding: 0;
-  margin: 0;
-  max-height: 380px;
-  overflow-y: auto;
-}
-</style>
