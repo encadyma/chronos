@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     data() {
       return {
@@ -67,6 +69,11 @@
     },
     mounted() {
       this.getCurrentProfile()
+
+      browser.storage.onChanged.addListener((changes, areaName) => {
+        if (!changes.profiles && !changes.currentProfiles) return
+        this.getCurrentProfile()
+      })
     }
   }
 </script>
