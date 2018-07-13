@@ -18,4 +18,4 @@ This method will build a `.zip`-ed extension to the `./dist` folder, which can t
 
 1. `cd your/path/to/webext-chronos`
 2. `yarn run build` -- this will create a webpack build and use `web-ext` to compress the build
-3. Extension output should not be in `./dist`.
+3. Extension output should now be in `./dist`.
