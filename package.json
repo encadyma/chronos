@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "A productive tab manager doubling as a website blocker. Let online work flow like time.",
   "scripts": {
-    "prego": "webpack .",
+    "prego": "webpack --config webpack.config.js",
     "go": "web-ext run -s ./build",
-    "watch:webpack": "webpack . --watch",
+    "watch:webpack": "webpack --config webpack.config.js --watch",
     "watch:firefox": "web-ext run -s ./build --verbose",
-    "prebuild": "cross-env NODE_ENV=production webpack .",
+    "prebuild": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build": "web-ext build -s ./build -a ./dist"
   },
   "main": "hello.js",
@@ -19,12 +19,13 @@
   "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.106",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "moment": "^2.22.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "web-ext": "^2.7.0"
   },
   "devDependencies": {
     "buble": "^0.19.3",
@@ -41,6 +42,7 @@
     "vue-template-compiler": "^2.5.16",
     "web-ext-types": "kelseasy/web-ext-types",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   }
 }
