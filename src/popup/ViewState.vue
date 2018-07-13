@@ -32,7 +32,8 @@
         <div class="tab-item" @click="toggleRenameState" :class="{ 'tab-item_selected_blinking': isRenamingState, 'tab-item_confirmed': justUpdatedName }">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
-            <span>Rename this state</span>
+            <span v-if="isRenamingState">Save new name</span>
+            <span v-else>Rename this state</span>
           </div>  
         </div>
         <div class="tabs-expandable__input tabs-expandable__input_orange" v-if="isRenamingState">
