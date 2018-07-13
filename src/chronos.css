@@ -64,6 +64,28 @@
   background-color: rgba(100, 100, 100, 0.05);
 }
 
+@keyframes tab_confirmation {
+  from {
+    background-color: rgb(166, 206, 168);
+  }
+  10% {
+    background-color: rgb(148, 207, 151);
+  }
+  40% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgb(148, 207, 151);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.tab-item_confirmed {
+  animation: tab_confirmation 800ms ease;
+}
+
 .tab-item-inner * {
   vertical-align: middle;
 }
@@ -260,13 +282,22 @@
 }
 
 .tabs-expandable__input {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   color: #fdfdfd;
   width: 100%;
 }
 
+.tabs-expandable__input_integrated {
+  background-color: rgba(100, 100, 100, 0.4);
+}
+
+.tabs-expandable__input_orange {
+  background-color: rgb(201, 113, 50);
+}
+
 .tabs-expandable__input input {
   background-color: transparent;
+  box-sizing: border-box;
   color: #fdfdfd;
   font-size: 14px;
   padding: 10px 20px;

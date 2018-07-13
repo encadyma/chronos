@@ -29,6 +29,15 @@
             <span>Replace this window with saved tabs</span>
           </div>  
         </div>
+        <div class="tab-item" @click="toggleRenameState" :class="{ 'tab-item_selected_blinking': isRenamingState, 'tab-item_confirmed': justUpdatedName }">
+          <div class="tab-item-inner">
+            <img :src="'../icons/ic_create.png'" class="tab-item__favicon"/>
+            <span>Rename this state</span>
+          </div>  
+        </div>
+        <div class="tabs-expandable__input tabs-expandable__input_orange" v-if="isRenamingState">
+          <input type="text" placeholder="Name your state here..." v-model="currentStateTitle"/>
+        </div>
         <div class="tab-item" @click="deleteState">
           <div class="tab-item-inner">
             <img :src="'../icons/ic_delete.png'" class="tab-item__favicon"/>
@@ -70,6 +79,9 @@
       return {
         isLoading: true,
         expandTabs: false,
+        isRenamingState: false,
+        justUpdatedName: false,
+        currentStateTitle: '',
         currentState: {}
       }
     },
@@ -77,6 +89,7 @@
     mounted() {
       browser.storage.local.get("states").then((store) => {
         this.currentState = store.states.find(s => s.id === this.$route.params.id) || null
+        this.currentStateTitle = this.currentState.title || 'nothing'
         this.isLoading = false
       })
     },
@@ -126,6 +139,27 @@
         }).then(() => {
           this.$router.go(-1)
         })
+      },
+      renameState() {
+        if (this.currentStateTitle.length < 3) return Promise.resolve(false)
+        return browser.storage.local.get("states").then((store) => {
+          const index = _.findIndex(store.states, { id: this.currentState.id })
+          store.states[index].title = this.currentStateTitle
+
+          return browser.storage.local.set(store)
+        }).then(() => true)
+      },
+      toggleRenameState() {
+        this.justUpdatedName = false
+
+        if (this.isRenamingState) {
+          this.renameState().then(res => {
+            if (res) { 
+              this.isRenamingState = false
+              this.justUpdatedName = true
+            }
+          })
+        } else this.isRenamingState = true
       }
     },
   }
