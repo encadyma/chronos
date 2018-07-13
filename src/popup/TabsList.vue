@@ -28,6 +28,9 @@
             @click="emitDeletion" title="Save new state">archive</i>
         </div>
       </div>
+      <div class="tabs-expandable__input" v-if="selectionMode">
+        <input type="text" placeholder="Name your state here..." v-model="currentStateName"/>
+      </div>
     </div>
     <div class="tabs-list">
       <div class="tabs-list__heading text-sub">
@@ -110,7 +113,7 @@
 .tabs-status {
   background-color: rgb(30, 100, 205);
   color: #fff;
-  padding: 12px 20px;
+  padding: 0;
   transition: 100ms ease;
 }
 
@@ -164,6 +167,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px 20px;
 }
 
 .tabs-status__section__action_btn:after {
@@ -205,7 +209,8 @@
         shouldSaveTabs: true,
         hasAccessedQuickstart: true,
         tabs: [],
-        hasNewState: false
+        hasNewState: false,
+        currentStateName: ''
       }
     },
     components: { PopupTab, TabsOptions },
@@ -263,7 +268,7 @@
             return { title: thisTab.title, favIconUrl: thisTab.favIconUrl, url: thisTab.url }
           })
 
-          state.title = 'Saved on ' + moment().format('MMM D, YYYY h:mm:ss A')
+          state.title = this.currentStateName || 'Saved on ' + moment().format('MMM D, YYYY h:mm:ss A')
           state.favIconUrl = '../icons/ic_restore_backup.png'
           state.tabs = resolvedTabs
           state.timestamp = parseInt(moment().format('x'))

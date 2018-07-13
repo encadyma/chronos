@@ -258,3 +258,18 @@
 .button.button-default:hover {
   background-color: rgba(12, 12, 13, 0.3);
 }
+
+.tabs-expandable__input {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fdfdfd;
+  width: 100%;
+}
+
+.tabs-expandable__input input {
+  background-color: transparent;
+  color: #fdfdfd;
+  font-size: 14px;
+  padding: 10px 20px;
+  width: 100%;
+  border: 0;
+}
