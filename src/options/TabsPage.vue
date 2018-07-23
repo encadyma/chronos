@@ -19,6 +19,7 @@
   import _ from 'lodash'
   import Draggable from 'vuedraggable'
   import TabItem from './components/TabItem'
+  import browser from 'webextension-polyfill'
 
   export default {
     data() {

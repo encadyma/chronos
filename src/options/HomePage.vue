@@ -16,6 +16,7 @@
 
 <script>
   import QuickAction from './components/QuickAction'
+  import browser from 'webextension-polyfill'
 
   export default {
     components: { QuickAction },

@@ -28,6 +28,7 @@
 <script>
   import ProfileMode from './components/ProfileMode'
   import IconPicker from '../components/IconPicker'
+  import browser from 'webextension-polyfill'
 
   export default {
     components: { ProfileMode, IconPicker },

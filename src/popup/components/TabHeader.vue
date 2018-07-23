@@ -22,6 +22,7 @@
 
 <script>
   import _ from 'lodash'
+  import browser from 'webextension-polyfill'
 
   export default {
     data() {

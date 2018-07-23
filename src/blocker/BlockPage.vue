@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import browser from 'webextension-polyfill'
   export default {
     methods: {
       goToPreviousBrowserPage() {

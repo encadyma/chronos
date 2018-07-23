@@ -23,6 +23,7 @@
 <script>
   import SiteListEditor from './components/SiteListEditor'
   import ProfileMode from './components/ProfileMode'
+  import browser from 'webextension-polyfill'
 
   import _ from 'lodash'
 

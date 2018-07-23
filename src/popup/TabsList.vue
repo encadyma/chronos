@@ -196,6 +196,7 @@
 <script>
   import PopupTab from './components/PopupTab'
   import TabsOptions from './components/TabsOptions'
+  import browser from 'webextension-polyfill'
   import moment from 'moment'
 
   export default {
@@ -311,7 +312,7 @@
       },
       switchActiveTab(tabId, windowId) {
         browser.windows.update(
-          windowId, 
+          windowId,
           { focused: true }
         ).then(() => {
           browser.tabs.update(tabId, { active: true })

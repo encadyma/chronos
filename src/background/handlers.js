@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill'
 import Utils from './util'
 
 export default {

@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill'
 import Utils from './util'
 import _ from 'lodash'
 
@@ -49,12 +50,18 @@ export default {
 
     const foundInActiveList = _blockerConfig.activeList.indexOf(hostname) > -1
     
+    let tabProfile = { url: `/blocker/blocker.html#/block?hostname=${hostname}` }
+
+    if (typeof browser.runtime.getBrowserInfo !== 'undefined') {
+      tabProfile.loadReplace = true
+    }
+
     if (this.usesBlacklist(_blockerConfig.blockMode) && foundInActiveList) {
       console.log("[chronos] Blocking " + hostname + ": found in profile blacklist")
-      await browser.tabs.update(tabId, { url: `/blocker/blocker.html#/block?hostname=${hostname}`, loadReplace: true })
+      await browser.tabs.update(tabId, tabProfile)
     } else if (this.usesWhitelist(_blockerConfig.blockMode) && !foundInActiveList) {
       console.log("[chronos] Blocking " + hostname + ": not found in profile whitelist")
-      await browser.tabs.update(tabId, { url: `/blocker/blocker.html#/block?hostname=${hostname}`, loadReplace: true })
+      await browser.tabs.update(tabId, tabProfile)
     }
   },
   getConfig: function () {

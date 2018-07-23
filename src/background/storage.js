@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill'
+
 export default async function () {
   const storage = await browser.storage.local.get()
   let newStorage = {}

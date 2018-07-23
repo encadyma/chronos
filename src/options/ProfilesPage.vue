@@ -9,6 +9,7 @@
 
 <script>
   import ProfileItem from './components/ProfileItem'
+  import browser from 'webextension-polyfill'
 
   export default {
     components: { ProfileItem },

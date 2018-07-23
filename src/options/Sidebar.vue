@@ -16,6 +16,7 @@
 
 <script>
   import SidebarItem from './components/SidebarItem'
+  import browser from 'webextension-polyfill'
 
   export default {
     components: { SidebarItem },

@@ -29,6 +29,7 @@
 <script>
   import PopupTab from './components/PopupTab'
   import TabsNavigation from './components/TabsNavigation'
+  import browser from 'webextension-polyfill'
 
   export default {
     data() {
